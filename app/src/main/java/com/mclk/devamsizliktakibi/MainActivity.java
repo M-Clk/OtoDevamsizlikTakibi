@@ -33,6 +33,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
     RecyclerView recyclerView;
     public static SharedPreferences settingValues;
     public static SimpleDateFormat dateFormat;
+    public static SharedPreferences.Editor settingValuesEditor;
     List<tblDers> tblDersList;
     Toolbar toolbar;
     TextView txtBilgi;
@@ -57,6 +58,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         this.txtVize = (TextView) findViewById(R.id.txt_vizeye_kalan);
         this.txtFinal = (TextView) findViewById(R.id.txt_finale_kalan);
         this.settingValues = getSharedPreferences("com.mclk.devamsizliktakibi", 0);
+        settingValuesEditor = MainActivity.settingValues.edit();
     }
 
     protected void onCreate(Bundle bundle) {

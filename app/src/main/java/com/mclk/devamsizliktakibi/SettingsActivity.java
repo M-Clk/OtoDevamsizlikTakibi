@@ -2,6 +2,7 @@ package com.mclk.devamsizliktakibi;
 
 import android.app.DatePickerDialog;
 import android.app.SearchManager;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -79,7 +80,6 @@ public class SettingsActivity extends AppCompatActivity {
         int year = calendar.get(Calendar.YEAR);
         int month = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
-        Toast.makeText(this,calendar.getTime().toString()+"",Toast.LENGTH_LONG).show();
 
         datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
@@ -93,11 +93,11 @@ public class SettingsActivity extends AppCompatActivity {
         datePickerDialog.show();
     }
 
-    void setDateTxt(TextView txtDate, String valueName) {
+    void setDateTxt(TextView txtDate) {
 
         Calendar calendar = Calendar.getInstance();
         try {
-            calendar.setTime(MainActivity.dateFormat.parse(MainActivity.settingValues.getString(valueName, MainActivity.dateFormat.format(calendar.getTime()))));
+            calendar.setTime(MainActivity.dateFormat.parse(MainActivity.settingValues.getString(Integer.toString(txtDate.getId()), MainActivity.dateFormat.format(calendar.getTime()))));
         }
         catch (Exception ex)
         {
@@ -110,10 +110,10 @@ public class SettingsActivity extends AppCompatActivity {
     }
 
     void LoadLastSettings() {
-        setDateTxt(txtDonemBaslangic, "donemBaslangicTarihi");
-        setDateTxt(txtDonemBitis, "donemBitisTarihi");
-        setDateTxt(txtFinal, "finalTarihi");
-        setDateTxt(txtVize, "vizeTarihi");
+        setDateTxt(txtDonemBaslangic);
+        setDateTxt(txtDonemBitis);
+        setDateTxt(txtFinal);
+        setDateTxt(txtVize);
     }
 
     void InitializingComponents() {
@@ -127,7 +127,25 @@ public class SettingsActivity extends AppCompatActivity {
     }
     void BtnGuncelleOnClick(View view)
     {
+        if(view.getId()==R.id.btn_ayarlar_guncelle)
+        if(CheckError())
+        { try {
 
+            MainActivity.settingValuesEditor.putString(Integer.toString(txtDonemBaslangic.getId()),txtDonemBaslangic.getText().toString());
+            MainActivity.settingValuesEditor.putString(Integer.toString(txtDonemBitis.getId()),txtDonemBitis.getText().toString());
+            MainActivity.settingValuesEditor.putString(Integer.toString(txtFinal.getId()),txtFinal.getText().toString());
+            MainActivity.settingValuesEditor.putString(Integer.toString(txtVize.getId()),txtVize.getText().toString());
+            MainActivity.settingValuesEditor.apply();
+            Toast.makeText(this,"Veriler güncellendi.",Toast.LENGTH_SHORT).show();
+                this.finish();
+            }catch (Exception ex)
+            {}
+
+        }
+    }
+    boolean CheckError()
+    {
+        return true;
     }
 
 }

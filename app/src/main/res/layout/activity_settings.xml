@@ -325,6 +325,7 @@
             android:layout_margin="3dp"
             android:background="@drawable/button_radius"
             android:fontFamily="@font/arsenal"
+            android:onClick="BtnGuncelleOnClick"
             android:text="Güncelle"
             android:textColor="@color/colorWhiting"
             android:textStyle="bold" />
