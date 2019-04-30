@@ -76,7 +76,7 @@ catch (Exception ex)
         Calendar calendar = Calendar.getInstance();
         Date date = new Date();
         String dateString = txtDate.getText().toString();
-        txtDate.getText().
+
         int year = calendar.get(Calendar.YEAR);
         int month = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
