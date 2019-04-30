@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorAccent">#d81b60</color>
+
+    <color name="colorGray">#9D9EAA</color>
+
+    <color name="colorNavigation">#D8EFEAFC</color>
+
+    <color name="colorPrimary">#6F65F1</color>
+
+    <color name="colorPrimaryDark">#4C499B</color>
+
+    <color name="colorText">#605d97</color>
+
+    <color name="colorWhiting">#C9D8FC</color>
+
+    <color name="black_overlay">#66000000</color>
+
+    <color name="cardview_dark_background">#ff424242</color>
+
+    <color name="cardview_light_background">#ffffffff</color>
+
+    <color name="cardview_shadow_end_color">#03000000</color>
+
+    <color name="cardview_shadow_start_color">#37000000</color>
+
+    <color name="design_default_color_primary">#3f51b5</color>
+
+    <color name="design_default_color_primary_dark">#303f9f</color>
+
+    <color name="error_color_material_dark">#ff7043</color>
+
+    <color name="error_color_material_light">#ff5722</color>
+
+    <color name="grup_backgroung">#35a647ff</color>
+
+    <color name="mtrl_btn_bg_color_disabled">#1f000000</color>
+
+    <color name="mtrl_btn_text_color_disabled">#61000000</color>
+
+    <color name="mtrl_btn_transparent_bg_color">#00ffffff</color>
+
+    <color name="mtrl_scrim_color">#52000000</color>
+
+    <color name="mtrl_textinput_default_box_stroke_color">#6b000000</color>
+
+    <color name="mtrl_textinput_disabled_color">#1f000000</color>
+
+    <color name="mtrl_textinput_filled_box_default_background_color">#0a000000</color>
+
+    <color name="mtrl_textinput_hovered_box_stroke_color">#de000000</color>
+</resources>

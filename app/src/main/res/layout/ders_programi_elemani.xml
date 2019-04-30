@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout android:layout_height="wrap_content" android:layout_width="match_parent" xmlns:aapt="http://schemas.android.com/aapt" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:android="http://schemas.android.com/apk/res/android">
+    <android.support.v7.widget.CardView android:id="@+id/crd_ders_programi" android:layout_height="wrap_content" android:layout_width="match_parent" app:cardElevation="0dp" app:cardCornerRadius="10dp" app:cardBackgroundColor="@android:color/transparent" android:backgroundTintMode="src_over" android:layout_marginRight="3dp" android:layout_marginTop="3dp" android:layout_marginLeft="3dp">
+        <LinearLayout android:layout_height="85dp" android:layout_width="match_parent" android:hapticFeedbackEnabled="false" android:paddingRight="10dp" android:paddingLeft="5dp" android:background="@drawable/list_view" android:orientation="horizontal" android:gravity="center">
+            <LinearLayout android:layout_height="match_parent" android:layout_width="0dp" android:orientation="vertical" android:gravity="center" android:layout_weight="3" android:padding="5dp">
+                <TextView android:id="@+id/txt_bas_saati" android:layout_height="wrap_content" android:layout_width="wrap_content" android:gravity="center" android:fontFamily="@font/arsenal" android:text="12:40" android:textColor="@color/colorText" android:textStyle="bold" android:textSize="20sp"/>
+                <TextView android:id="@+id/txt_bit_saati" android:layout_height="wrap_content" android:layout_width="wrap_content" android:gravity="center" android:fontFamily="@font/arsenal" android:text="12:00" android:textColor="@color/colorText" android:textStyle="bold" android:textSize="20sp"/>
+            </LinearLayout>
+            <TextView android:id="@+id/txt_ders_adi" android:layout_height="match_parent" android:layout_width="0dp" android:gravity="fill_vertical" android:layout_weight="8" android:padding="5dp" android:fontFamily="@font/arsenal" android:text="Elektronik Devre Elemanları Ve Ölçümü" android:textColor="@color/colorText" android:textSize="16sp"/>
+            <ImageButton android:id="@+id/btn_program_sil" android:layout_height="match_parent" android:layout_width="0dp" android:background="@android:color/transparent" android:layout_weight="1" app:srcCompat="@drawable/ic_delete_forever_black_24dp"/>
+            <TextView android:id="@+id/txt_id" android:layout_height="wrap_content" android:layout_width="wrap_content" android:text="0" android:visibility="gone"/>
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
+</LinearLayout>

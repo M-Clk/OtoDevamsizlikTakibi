@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest package="com.mclk.devamsizliktakibi"
+xmlns:android="http://schemas.android.com/apk/res/android">
+<uses-permission android:name="android.permission.REORDER_TASKS"/>
+<uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
+<application android:theme="@style/Theme.Design.NoActionBar"
+    android:supportsRtl="true"
+    android:roundIcon="@mipmap/ic_launcher_round"
+    android:label="@string/app_name"
+    android:icon="@mipmap/ic_launcher"
+    android:allowBackup="true">
+    <activity android:name="com.mclk.devamsizliktakibi.MainActivity">
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN"/>
+            <category android:name="android.intent.category.LAUNCHER"/>
+        </intent-filter>
+    </activity>
+    <meta-data android:name="preloaded_fonts"
+        android:resource="@array/preloaded_fonts"/>
+    <activity android:name="com.mclk.devamsizliktakibi.DersProgramiActivity"
+        android:parentActivityName="com.mclk.devamsizliktakibi.MainActivity">
+        <meta-data android:name="android.support.PARENT_ACTIVITY"
+            android:value=".MainActivity"/>
+    </activity>
+    <activity android:name="com.mclk.devamsizliktakibi.SettingsActivity"
+        android:parentActivityName="com.mclk.devamsizliktakibi.MainActivity">
+        <meta-data android:name="android.support.PARENT_ACTIVITY"
+            android:value=".MainActivity"/>
+    </activity>
+    <activity android:name="com.mclk.devamsizliktakibi.TatillerActivity"
+        android:parentActivityName="com.mclk.devamsizliktakibi.MainActivity">
+        <meta-data android:name="android.support.PARENT_ACTIVITY"
+            android:value=".MainActivity"/>
+    </activity>
+    <activity android:name="com.mclk.devamsizliktakibi.AlarmOptionsActivity"
+        android:parentActivityName="com.mclk.devamsizliktakibi.MainActivity">
+        <meta-data android:name="android.support.PARENT_ACTIVITY"
+            android:value=".MainActivity"/>
+    </activity>
+    <activity android:name="com.mclk.devamsizliktakibi.DerslerActivity"
+        android:parentActivityName="com.mclk.devamsizliktakibi.MainActivity">
+        <meta-data android:name="android.support.PARENT_ACTIVITY"
+            android:value=".MainActivity"/>
+    </activity>
+    <receiver android:name="com.mclk.devamsizliktakibi.UyariDinleyici"/>
+    <receiver android:name="com.mclk.devamsizliktakibi.AlarmDinleyici"/>
+    <service android:name="com.mclk.devamsizliktakibi.InitialSettings"/>
+    <receiver android:name="com.mclk.devamsizliktakibi.InitialSettingsReceiver">
+        <intent-filter>
+            <action android:name="android.intent.action.BOOT_COMPLETED"/>
+            <action android:name="android.intent.action.EXTERNAL_APPLICATIONS_AVAILABLE"/>
+        </intent-filter>
+    </receiver>
+    <activity android:name="com.mclk.devamsizliktakibi.NotificationKapat"/>
+    <activity android:name="com.mclk.devamsizliktakibi.DevGuncelle"/>
+    <activity android:name="com.mclk.devamsizliktakibi.Tatildi"/>
+    <activity android:name="com.mclk.devamsizliktakibi.AlarmAnindaAcilan"
+        android:theme="@style/FullscreenTheme"
+
+        android:label="@string/title_activity_alarm_aninda_acilan"
+        android:configChanges="keyboardHidden|orientation|screenSize">
+        <intent-filter>
+            <category android:name="android.intent.category.LAUNCHER"/>
+            <category android:name="android.intent.category.HOME"/>
+            <category android:name="android.intent.category.DEFAULT"/>
+        </intent-filter>
+    </activity>
+    <meta-data android:name="com.android.vending.derived.apk.id" android:value="1"/>
+</application>
+</manifest>

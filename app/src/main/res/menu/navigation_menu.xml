@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:showIn="@layout/navigation_drawer">
+    <group android:checkableBehavior="single">
+        <item android:icon="@drawable/dersler" android:id="@+id/dersler" android:title="@string/lessons"/>
+        <item android:icon="@drawable/syllabus" android:id="@+id/syllabus" android:title="@string/syllabus"/>
+        <item android:icon="@drawable/tatil" android:id="@+id/tatiller" android:visible="false" android:title="@string/holidays"/>
+        <item android:icon="@drawable/alarm_options" android:id="@+id/alarm_options" android:title="@string/alarm_options"/>
+        <item android:icon="@drawable/settings" android:id="@+id/settings" android:title="@string/settings"/>
+    </group>
+</menu>

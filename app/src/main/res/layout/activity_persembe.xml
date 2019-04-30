@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout android:layout_height="match_parent" android:layout_width="match_parent" xmlns:aapt="http://schemas.android.com/aapt" xmlns:app="http://schemas.android.com/apk/res-auto" xmlns:android="http://schemas.android.com/apk/res/android">
+    <LinearLayout android:layout_height="match_parent" android:layout_width="match_parent" android:orientation="vertical">
+        <TextView android:id="@+id/txt_bilgi_persembe" android:layout_height="wrap_content" android:layout_width="wrap_content" android:layout_alignTop="@+id/recyclerViewPersembe" android:text="Perşembe günü için henüz bir ders eklenmedi. Bir ders eklemek için ekle butonuna dokunun." android:layout_margin="10dp" android:visibility="gone" android:textColor="@color/colorAccent"/>
+        <android.support.v7.widget.RecyclerView android:id="@+id/recyclerViewPersembe" android:layout_height="match_parent" android:layout_width="match_parent"/>
+    </LinearLayout>
+</android.support.constraint.ConstraintLayout>

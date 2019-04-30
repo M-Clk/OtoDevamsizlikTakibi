@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">Devamsızlık Takibi</string>
+    <string name="settings">Ayarlar</string>
+
+    <string name="status_bar_notification_info_overflow">999+</string>
+
+    <string name="syllabus">Ders Programı</string>
+
+    <string name="title_activity_alarm_aninda_acilan">AlarmAnindaAcilan</string>
+    <string name="holidays">Tatiller</string>
+
+    <string name="lessons">Dersler</string>
+    <string name="drawer_close">Drawer Kapat</string>
+
+    <string name="drawer_open">Drawer Aç</string>
+    <string name="alarm_options">Alarm Seçenekleri</string>
+</resources>

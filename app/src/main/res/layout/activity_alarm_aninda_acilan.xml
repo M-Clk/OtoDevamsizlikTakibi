@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+    <FrameLayout
+    android:layout_height="match_parent"
+    android:layout_width="match_parent"
+    android:background="#0099cc"
+    xmlns:aapt="http://schemas.android.com/aapt"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <LinearLayout
+        android:layout_height="match_parent"
+        android:layout_width="match_parent"
+        android:orientation="vertical">
+
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:keepScreenOn="true"
+        android:text=" 12+50"
+        android:id="@+id/txt_soru"
+        android:gravity="center"
+        android:textColor="#33b5e5"
+        android:textStyle="bold"
+        android:textSize="60sp"/>
+
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/backround_radius_navigation"
+            android:backgroundTint="@color/colorWhiting"
+            android:gravity="center"
+            android:orientation="horizontal"
+            android:paddingRight="20dp">
+
+            <EditText
+                android:id="@+id/txt_cevap"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="9"
+                android:background="@null"
+                android:ems="10"
+                android:inputType="numberDecimal"
+                android:paddingLeft="25dp"
+                android:paddingRight="25dp"
+                android:textColor="@color/colorText"
+                android:textSize="50sp"
+                android:textStyle="bold" />
+
+            <ImageButton
+                android:id="@+id/btn_kontrol_et"
+                android:layout_width="0dp"
+                android:layout_height="match_parent"
+                android:layout_weight="1"
+                android:background="@null"
+                app:srcCompat="@drawable/ic_arrow_forward_black_24dp" />
+
+        </LinearLayout>
+
+
+    <LinearLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:background="@color/black_overlay"
+        android:id="@+id/fullscreen_content_controls"
+        android:layout_gravity="bottom|center_vertical|center_horizontal|center">
+
+    <TextView
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:keepScreenOn="true"
+        android:text="Mantık Devreleri -1 dersine gitmeniz gerek. Uyandığınızdan emin olmamız için bu soruyu çözmeniz gerek."
+        android:id="@+id/txt_bilgilendirme"
+        android:gravity="center"
+        android:textColor="#33b5e5"
+        android:textStyle="bold"
+        android:textSize="30sp"/>
+
+</LinearLayout>
+
+</LinearLayout>
+
+    <FrameLayout
+        android:layout_height="match_parent"
+        android:layout_width="wrap_content"
+        android:fitsSystemWindows="true"/>
+
+</FrameLayout>
