@@ -26,5 +26,6 @@
             android:text="Title"
             android:textAlignment="center"
             android:textSize="30sp" />
+
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

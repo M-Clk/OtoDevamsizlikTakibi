@@ -1,6 +1,8 @@
 package com.mclk.devamsizliktakibi;
 
+import android.app.AlertDialog;
 import android.app.DatePickerDialog;
+import android.app.Dialog;
 import android.app.SearchManager;
 import android.content.Intent;
 import android.content.SharedPreferences;
@@ -10,6 +12,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
+import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -32,15 +35,19 @@ public class SettingsActivity extends AppCompatActivity {
             txtFinal,
             txtSorguZamani;
     Button btnGuncelle;
-
-
     DatePickerDialog datePickerDialog;
+    Dialog dialogOption;
+    String selectedOption = "Dersin Bittiği An|" + 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+
         InitializingComponents();
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
         LoadLastSettings();
 
     }
@@ -59,9 +66,6 @@ public class SettingsActivity extends AppCompatActivity {
             return;
         } else if (view.getId() == R.id.etiket_final) {
             txtFinal.callOnClick();
-            return;
-        } else if (view.getId() == R.id.etiket_sorgu_zamani) {
-            txtSorguZamani.callOnClick();
             return;
         }
 
@@ -111,7 +115,10 @@ public class SettingsActivity extends AppCompatActivity {
         setDateTxt(txtDonemBitis);
         setDateTxt(txtFinal);
         setDateTxt(txtVize);
-        txtSorguZamani.setText(MainActivity.settingValues.getString(Integer.toString(txtSorguZamani.getId()),"Uyarı zamanınızı seçin."));
+        String idLiStr = MainActivity.settingValues.getString(Integer.toString(txtSorguZamani.getId()), selectedOption);
+        txtSorguZamani.setText(idLiStr.substring(0, idLiStr.indexOf('|')));
+        toolbar = (Toolbar) findViewById(R.id.myToolbar);
+        toolbar.setTitle("Ayarlar");
     }
 
     void InitializingComponents() {
@@ -132,14 +139,58 @@ public class SettingsActivity extends AppCompatActivity {
                     MainActivity.settingValuesEditor.putString(Integer.toString(txtDonemBitis.getId()), txtDonemBitis.getText().toString());
                     MainActivity.settingValuesEditor.putString(Integer.toString(txtFinal.getId()), txtFinal.getText().toString());
                     MainActivity.settingValuesEditor.putString(Integer.toString(txtVize.getId()), txtVize.getText().toString());
-                    MainActivity.settingValuesEditor.putString(Integer.toString(txtSorguZamani.getId()),txtSorguZamani.getText().toString());
+                    MainActivity.settingValuesEditor.putString(Integer.toString(txtSorguZamani.getId()), selectedOption);
                     MainActivity.settingValuesEditor.apply();
                     Toast.makeText(this, "Veriler güncellendi.", Toast.LENGTH_SHORT).show();
                     this.finish();
                 } catch (Exception ex) {
                 }
-
             }
+    }
+
+    void OpenOptions(View view) {
+        if (view.getId() == R.id.etiket_sorgu_zamani) {
+            txtSorguZamani.callOnClick();
+            return;
+        }
+        dialogOption = new Dialog(this);
+        dialogOption.setContentView(R.layout.sorgu_zamanlari_dialog);
+        RadioButton rdDersAni = (RadioButton) dialogOption.findViewById(R.id.rdDersAni0);
+        RadioButton rdSonra10 = (RadioButton) dialogOption.findViewById(R.id.rdSonra10);
+        RadioButton rdSonra30 = (RadioButton) dialogOption.findViewById(R.id.rdSonra30);
+        RadioButton rdSonra60 = (RadioButton) dialogOption.findViewById(R.id.rdSonra60);
+
+        if (txtSorguZamani.getText().toString().equals(rdDersAni.getText().toString()))
+            rdDersAni.setChecked(true);
+        else if (txtSorguZamani.getText().toString().equals(rdSonra10.getText().toString()))
+            rdSonra10.setChecked(true);
+        else if (txtSorguZamani.getText().toString().equals(rdSonra30.getText().toString()))
+            rdSonra30.setChecked(true);
+        else
+            rdSonra60.setChecked(true);
+
+        dialogOption.show();
+    }
+
+    void SelectOption(View view) {
+        RadioButton rd = (RadioButton) view;
+        txtSorguZamani.setText(rd.getText().toString());
+        int time=0;
+        switch (view.getId())
+        {
+            case R.id.rdSonra10:
+                time=10;
+                break;
+            case R.id.rdSonra30:
+                time=30;
+                break;
+            case R.id.rdSonra60:
+                time=60;
+                break;
+        }
+
+        selectedOption = rd.getText().toString() + "|" + time;
+        dialogOption.dismiss();
     }
 
     boolean CheckError() {
