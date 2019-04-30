@@ -18,7 +18,6 @@ import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -43,7 +42,6 @@ public class DerslerActivity extends AppCompatActivity implements View.OnClickLi
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         setData();
-
     }
     void setData()
     {
@@ -82,7 +80,6 @@ public class DerslerActivity extends AppCompatActivity implements View.OnClickLi
             ShowEkleDialog(this);
         }
     }
-
     public void ShowEkleDialog(Context context) {
         final Dialog dialog = new Dialog(context);
         dialog.setContentView(R.layout.ekle_ders_temp);
@@ -93,7 +90,6 @@ public class DerslerActivity extends AppCompatActivity implements View.OnClickLi
         final EditText txtDevamsizlikSiniri = (EditText) dialog.findViewById(R.id.txt_ekle_devamsizlik_siniri);
         final EditText txtKritikSinir = (EditText) dialog.findViewById(R.id.txt_ekle_kritik_sinir);
         final CheckBox chbSinir = (CheckBox) dialog.findViewById(R.id.cbSinir);
-
 
         dialog.show();
         SpinnerAdapter spinnerAdapter = new ArrayAdapter<String>(dialog.getContext(), R.layout.spinner_item, new ArrayList(Arrays.asList(new String[]{"Kredi", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"})));
@@ -120,7 +116,6 @@ public class DerslerActivity extends AppCompatActivity implements View.OnClickLi
                     Toast.makeText(dialog.getContext(),"Ders eklenemedi. Verilerinizi kontrol edin. Tekrar deneyin.",Toast.LENGTH_LONG).show();
                     else
                     {
-
                         dialog.dismiss();
                         setData();
                     }

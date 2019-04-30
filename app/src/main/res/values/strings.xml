@@ -6,7 +6,7 @@
 
     <string name="syllabus">Ders Programı</string>
 
-    <string name="title_activity_alarm_aninda_acilan">AlarmAnindaAcilan</string>
+    <string name="title_activity_alarm_aninda_acilan" >AlarmAnindaAcilan</string>
     <string name="holidays">Tatiller</string>
 
     <string name="lessons">Dersler</string>

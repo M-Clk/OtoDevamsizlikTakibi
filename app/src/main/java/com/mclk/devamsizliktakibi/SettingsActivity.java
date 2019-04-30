@@ -100,7 +100,7 @@ public class SettingsActivity extends AppCompatActivity {
 
         Calendar calendar = Calendar.getInstance();
         try {
-            calendar.setTime(MainActivity.dateFormat.parse(MainActivity.settingValues.getString(Integer.toString(txtDate.getId()), MainActivity.dateFormat.format(calendar.getTime()))));
+            calendar.setTime(MainActivity.dateFormat.parse(MainActivity.settingValues.getString(getResources().getResourceEntryName(txtDate.getId()), MainActivity.dateFormat.format(calendar.getTime()))));
         } catch (Exception ex) {
 
         }
@@ -115,7 +115,7 @@ public class SettingsActivity extends AppCompatActivity {
         setDateTxt(txtDonemBitis);
         setDateTxt(txtFinal);
         setDateTxt(txtVize);
-        String idLiStr = MainActivity.settingValues.getString(Integer.toString(txtSorguZamani.getId()), selectedOption);
+        String idLiStr = MainActivity.settingValues.getString(getResources().getResourceEntryName(txtSorguZamani.getId()), selectedOption);
         txtSorguZamani.setText(idLiStr.substring(0, idLiStr.indexOf('|')));
         toolbar = (Toolbar) findViewById(R.id.myToolbar);
         toolbar.setTitle("Ayarlar");
@@ -135,11 +135,11 @@ public class SettingsActivity extends AppCompatActivity {
         if (view.getId() == R.id.btn_ayarlar_guncelle)
             if (CheckError()) {
                 try {
-                    MainActivity.settingValuesEditor.putString(Integer.toString(txtDonemBaslangic.getId()), txtDonemBaslangic.getText().toString());
-                    MainActivity.settingValuesEditor.putString(Integer.toString(txtDonemBitis.getId()), txtDonemBitis.getText().toString());
-                    MainActivity.settingValuesEditor.putString(Integer.toString(txtFinal.getId()), txtFinal.getText().toString());
-                    MainActivity.settingValuesEditor.putString(Integer.toString(txtVize.getId()), txtVize.getText().toString());
-                    MainActivity.settingValuesEditor.putString(Integer.toString(txtSorguZamani.getId()), selectedOption);
+                    MainActivity.settingValuesEditor.putString(getResources().getResourceEntryName(txtDonemBaslangic.getId()), txtDonemBaslangic.getText().toString());
+                    MainActivity.settingValuesEditor.putString(getResources().getResourceEntryName(txtDonemBitis.getId()), txtDonemBitis.getText().toString());
+                    MainActivity.settingValuesEditor.putString(getResources().getResourceEntryName(txtFinal.getId()), txtFinal.getText().toString());
+                    MainActivity.settingValuesEditor.putString(getResources().getResourceEntryName(txtVize.getId()), txtVize.getText().toString());
+                    MainActivity.settingValuesEditor.putString(getResources().getResourceEntryName(txtSorguZamani.getId()), selectedOption);
                     MainActivity.settingValuesEditor.apply();
                     Toast.makeText(this, "Veriler güncellendi.", Toast.LENGTH_SHORT).show();
                     this.finish();
