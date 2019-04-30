@@ -13,8 +13,11 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.Month;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.Locale;
 import java.util.Set;
 
 
@@ -45,7 +48,7 @@ public class SettingsActivity extends AppCompatActivity {
         if (view.getId() == R.id.etiket_donem_bas_tarihi) {
             {
                 txtDonemBaslangic.callOnClick();
-           return;
+                return;
             }
         } else if (view.getId() == R.id.etiket_donem_bitis_tarihi) {
             txtDonemBitis.callOnClick();
@@ -63,29 +66,26 @@ public class SettingsActivity extends AppCompatActivity {
 
         final TextView txtDate = (TextView) view;
 
-SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
 
-try {
-    Date date = dateFormat.parse("01.01.1998");
-}
-catch (Exception ex)
-{
-
-}
-
-        Calendar calendar = Calendar.getInstance();
-        Date date = new Date();
         String dateString = txtDate.getText().toString();
+        Calendar calendar=Calendar.getInstance();
 
+        try {
+           calendar.setTime(MainActivity.dateFormat.parse(dateString));
+        }catch (Exception ex)
+        {
+
+        }
         int year = calendar.get(Calendar.YEAR);
         int month = calendar.get(Calendar.MONTH);
         int day = calendar.get(Calendar.DAY_OF_MONTH);
+        Toast.makeText(this,calendar.getTime().toString()+"",Toast.LENGTH_LONG).show();
 
         datePickerDialog = new DatePickerDialog(this, new DatePickerDialog.OnDateSetListener() {
             @Override
             public void onDateSet(DatePicker datePicker, int year, int month, int day) {
 
-                txtDate.setText(String.format("%02d", day) + "." + String.format("%02d", (month)) + "." + String.format("%04d", year));
+                txtDate.setText(String.format("%02d", day) + "." + String.format("%02d", (month+1)) + "." + String.format("%04d", year));
 
             }
         }, year, month, day);
@@ -93,23 +93,29 @@ catch (Exception ex)
         datePickerDialog.show();
     }
 
-    void setDateTxt(TextView txtDate,String valueName)
-    {
+    void setDateTxt(TextView txtDate, String valueName) {
 
         Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(MainActivity.settingValues.getLong(valueName,System.currentTimeMillis()));
+        try {
+            calendar.setTime(MainActivity.dateFormat.parse(MainActivity.settingValues.getString(valueName, MainActivity.dateFormat.format(calendar.getTime()))));
+        }
+        catch (Exception ex)
+        {
+
+        }
         int dayOfMonth = calendar.get(Calendar.DAY_OF_MONTH);
-        int month= calendar.get(Calendar.MONTH);
+        int month = calendar.get(Calendar.MONTH);
         int year = calendar.get(Calendar.YEAR);
-        txtDate.setText(String.format("%02d", dayOfMonth) + "." + String.format("%02d", month) + "." + String.format("%04d", year));
+        txtDate.setText(String.format("%02d", dayOfMonth) + "." + String.format("%02d", month+1) + "." + String.format("%04d", year));
     }
-    void LoadLastSettings()
-    {
-        setDateTxt(txtDonemBaslangic,"donemBaslangicTarihi");
-        setDateTxt(txtDonemBitis,"donemBitisTarihi");
-        setDateTxt(txtFinal,"finalTarihi");
-        setDateTxt(txtVize,"vizeTarihi");
+
+    void LoadLastSettings() {
+        setDateTxt(txtDonemBaslangic, "donemBaslangicTarihi");
+        setDateTxt(txtDonemBitis, "donemBitisTarihi");
+        setDateTxt(txtFinal, "finalTarihi");
+        setDateTxt(txtVize, "vizeTarihi");
     }
+
     void InitializingComponents() {
         toolbar = (Toolbar) findViewById(R.id.myToolbar);
         this.txtVize = (TextView) findViewById(R.id.txtVizeTarihi);
@@ -117,9 +123,10 @@ catch (Exception ex)
         this.txtDonemBaslangic = (TextView) findViewById(R.id.txt_donem_bas_tarihi);
         this.txtDonemBitis = (TextView) findViewById(R.id.txt_donem_bitis_tarihi);
         this.txtSorguZamani = (TextView) findViewById(R.id.txt_sorgu_zamani);
-        this.btnGuncelle=(Button)findViewById(R.id.btn_ayarlar_guncelle);
-
-
+        this.btnGuncelle = (Button) findViewById(R.id.btn_ayarlar_guncelle);
+    }
+    void BtnGuncelleOnClick(View view)
+    {
 
     }
 

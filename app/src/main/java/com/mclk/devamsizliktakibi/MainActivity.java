@@ -19,6 +19,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import java.text.SimpleDateFormat;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements OnNavigationItemSelectedListener {
@@ -30,6 +32,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
     Adapter recAdapter;
     RecyclerView recyclerView;
     public static SharedPreferences settingValues;
+    public static SimpleDateFormat dateFormat;
     List<tblDers> tblDersList;
     Toolbar toolbar;
     TextView txtBilgi;
@@ -71,6 +74,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
 
 
         this.settingValues = getSharedPreferences("com.mclk.devamsizliktakibi", MODE_PRIVATE);
+        dateFormat = new SimpleDateFormat("dd.MM.yyyy");
 
         this.recyclerView.setHasFixedSize(true);
         this.recyclerView.setLayoutManager(new LinearLayoutManager(this));
