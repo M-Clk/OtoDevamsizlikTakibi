@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="380dp"
     android:layout_height="wrap_content"
     android:background="@drawable/backround_radius_navigation">
@@ -14,7 +14,7 @@
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:fontFamily="@font/arsenal"
-        android:text="Bildirim Ne Zaman Gelsin?"
+        android:text="Alarm Ne Zaman Çalsın?"
         android:textColor="@color/colorText"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
@@ -35,7 +35,7 @@
         app:layout_constraintTop_toBottomOf="@+id/txtBaslik">
 
         <RadioButton
-            android:id="@+id/rdDersAni0"
+            android:id="@+id/dakikaOnce10"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="2dp"
@@ -46,13 +46,13 @@
             android:onClick="SelectOption"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:text="Dersin Bittiği An"
+            android:text="10 Dakika Önce"
             android:textAlignment="viewEnd"
             android:textColor="@color/colorNavigation"
             android:textSize="16sp" />
 
         <RadioButton
-            android:id="@+id/rdSonra10"
+            android:id="@+id/dakikaOnce30"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="2dp"
@@ -63,13 +63,13 @@
             android:onClick="SelectOption"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:text="10 Dakika Sonra"
+            android:text="30 Dakika Önce"
             android:textAlignment="viewEnd"
             android:textColor="@color/colorNavigation"
             android:textSize="16sp" />
 
         <RadioButton
-            android:id="@+id/rdSonra30"
+            android:id="@+id/dakikaOnce45"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="2dp"
@@ -80,13 +80,13 @@
             android:onClick="SelectOption"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:text="30 Dakika Sonra"
+            android:text="45 Dakika Önce"
             android:textAlignment="viewEnd"
             android:textColor="@color/colorNavigation"
             android:textSize="16sp" />
 
         <RadioButton
-            android:id="@+id/rdSonra60"
+            android:id="@+id/dakikaOnce60"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="2dp"
@@ -97,10 +97,77 @@
             android:onClick="SelectOption"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:text="1 Saat Sonra"
+            android:text="1 Saat Önce"
             android:textAlignment="viewEnd"
             android:textColor="@color/colorNavigation"
             android:textSize="16sp" />
 
+        <RadioButton
+            android:id="@+id/dakikaOnce90"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2dp"
+            android:layout_weight="1"
+            android:background="@drawable/backround_radius"
+            android:buttonTint="@color/colorNavigation"
+            android:fontFamily="@font/arsenal"
+            android:onClick="SelectOption"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="1,5 Saat Önce"
+            android:textAlignment="viewEnd"
+            android:textColor="@color/colorNavigation"
+            android:textSize="16sp" />
+
+        <RadioButton
+            android:id="@+id/dakikaOnce120"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2dp"
+            android:layout_weight="1"
+            android:background="@drawable/backround_radius"
+            android:buttonTint="@color/colorNavigation"
+            android:fontFamily="@font/arsenal"
+            android:onClick="SelectOption"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="2 Saat Önce"
+            android:textAlignment="viewEnd"
+            android:textColor="@color/colorNavigation"
+            android:textSize="16sp" />
+
+        <RadioButton
+            android:id="@+id/dakikaOnce135"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2dp"
+            android:layout_weight="1"
+            android:background="@drawable/backround_radius"
+            android:buttonTint="@color/colorNavigation"
+            android:fontFamily="@font/arsenal"
+            android:onClick="SelectOption"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="2,5 Saat Önce"
+            android:textAlignment="viewEnd"
+            android:textColor="@color/colorNavigation"
+            android:textSize="16sp" />
+
+        <RadioButton
+            android:id="@+id/dakikaOnce180"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2dp"
+            android:layout_weight="1"
+            android:background="@drawable/backround_radius"
+            android:buttonTint="@color/colorNavigation"
+            android:fontFamily="@font/arsenal"
+            android:onClick="SelectOption"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="3 Saat Önce"
+            android:textAlignment="viewEnd"
+            android:textColor="@color/colorNavigation"
+            android:textSize="16sp" />
     </RadioGroup>
 </android.support.constraint.ConstraintLayout>

@@ -2,30 +2,106 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_width="380dp"
+    android:layout_height="wrap_content"
+    android:id="@+id/constraint_data_dialog"
+    android:background="@drawable/backround_radius_navigation">
 
-    <LinearLayout
-        android:id="@+id/linearLayout2"
+    <TextView
+        android:id="@+id/txt_baslik_dialog"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:fontFamily="@font/arsenal"
+        android:text="Bildirim Ne Zaman Gelsin?"
+        android:textColor="@color/colorText"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <RadioGroup
         android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginBottom="8dp"
-        android:orientation="vertical"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.489"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/txt_baslik_dialog">
 
-        <TextView
-            android:id="@+id/textView4"
+        <RadioButton
+            android:id="@+id/rdDersAni0"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Title"
-            android:textAlignment="center"
-            android:textSize="30sp" />
+            android:layout_marginBottom="2dp"
+            android:layout_weight="1"
+            android:background="@drawable/backround_radius"
+            android:buttonTint="@color/colorNavigation"
+            android:fontFamily="@font/arsenal"
+            android:onClick="SelectOption"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="Dersin Bittiği An"
+            android:textAlignment="viewEnd"
+            android:textColor="@color/colorNavigation"
+            android:textSize="16sp" />
 
-    </LinearLayout>
+        <RadioButton
+            android:id="@+id/rdSonra10"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2dp"
+            android:layout_weight="1"
+            android:background="@drawable/backround_radius"
+            android:buttonTint="@color/colorNavigation"
+            android:fontFamily="@font/arsenal"
+            android:onClick="SelectOption"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="10 Dakika Sonra"
+            android:textAlignment="viewEnd"
+            android:textColor="@color/colorNavigation"
+            android:textSize="16sp" />
+
+        <RadioButton
+            android:id="@+id/rdSonra30"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2dp"
+            android:layout_weight="1"
+            android:background="@drawable/backround_radius"
+            android:buttonTint="@color/colorNavigation"
+            android:fontFamily="@font/arsenal"
+            android:onClick="SelectOption"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="30 Dakika Sonra"
+            android:textAlignment="viewEnd"
+            android:textColor="@color/colorNavigation"
+            android:textSize="16sp" />
+
+        <RadioButton
+            android:id="@+id/rdSonra60"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="2dp"
+            android:layout_weight="1"
+            android:background="@drawable/backround_radius"
+            android:buttonTint="@color/colorNavigation"
+            android:fontFamily="@font/arsenal"
+            android:onClick="SelectOption"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="1 Saat Sonra"
+            android:textAlignment="viewEnd"
+            android:textColor="@color/colorNavigation"
+            android:textSize="16sp" />
+
+    </RadioGroup>
 </android.support.constraint.ConstraintLayout>

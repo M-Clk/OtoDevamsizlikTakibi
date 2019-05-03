@@ -28,9 +28,8 @@
             android:id="@+id/txt_bilgi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_alignTop="@+id/recycler_view"
             android:fontFamily="@font/arsenal"
-            android:text="Kayıtlı ders bulunamadı. Lütfen verilerinizi yapılandırın."
+            android:text="@string/bilgi_txt"
             android:textColor="@color/colorAccent"
             android:visibility="gone"
             app:layout_constraintEnd_toEndOf="parent"
@@ -77,7 +76,7 @@
                 android:layout_height="wrap_content"
                 android:fontFamily="@font/arsenal"
                 android:gravity="center"
-                android:text="Sınavlar İçin Kalan Süre (Hafta)"
+                android:text="@string/kalan_sure"
                 android:textColor="@color/colorGray" />
         </LinearLayout>
 
@@ -93,7 +92,7 @@
                 android:layout_weight="1"
                 android:fontFamily="@font/arsenal"
                 android:gravity="center"
-                android:text="Vize"
+                android:text="@string/vize"
                 android:textColor="@color/colorPrimary" />
 
             <TextView
@@ -103,7 +102,7 @@
                 android:layout_weight="1"
                 android:fontFamily="@font/arsenal"
                 android:gravity="center"
-                android:text="Final"
+                android:text="@string/finall"
                 android:textColor="@color/colorPrimary" />
         </LinearLayout>
 
@@ -122,7 +121,7 @@
                 android:layout_weight="1"
                 android:fontFamily="@font/arsenal"
                 android:gravity="center"
-                android:text="01"
+                android:text="@string/_01"
                 android:textColor="@color/colorText"
                 android:textSize="25sp"
                 android:textStyle="bold" />
@@ -137,7 +136,7 @@
                 android:layout_weight="1"
                 android:fontFamily="@font/arsenal"
                 android:gravity="center"
-                android:text="08"
+                android:text="@string/_08"
                 android:textColor="@color/colorText"
                 android:textSize="25sp"
                 android:textStyle="bold" />

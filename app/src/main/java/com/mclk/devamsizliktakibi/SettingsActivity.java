@@ -1,11 +1,7 @@
 package com.mclk.devamsizliktakibi;
 
-import android.app.AlertDialog;
 import android.app.DatePickerDialog;
 import android.app.Dialog;
-import android.app.SearchManager;
-import android.content.Intent;
-import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -15,16 +11,7 @@ import android.widget.DatePicker;
 import android.widget.RadioButton;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.Month;
 import java.util.Calendar;
-import java.util.Date;
-import java.util.Locale;
-import java.util.Set;
-
-
 
 public class SettingsActivity extends AppCompatActivity {
 
@@ -49,7 +36,6 @@ public class SettingsActivity extends AppCompatActivity {
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         LoadLastSettings();
-
     }
 
     void openTimePickerDialog(final View view) {
@@ -70,7 +56,6 @@ public class SettingsActivity extends AppCompatActivity {
         }
 
         final TextView txtDate = (TextView) view;
-
 
         String dateString = txtDate.getText().toString();
         Calendar calendar = Calendar.getInstance();
@@ -168,7 +153,6 @@ public class SettingsActivity extends AppCompatActivity {
             rdSonra30.setChecked(true);
         else
             rdSonra60.setChecked(true);
-
         dialogOption.show();
     }
 
@@ -209,7 +193,6 @@ public class SettingsActivity extends AppCompatActivity {
             Calendar finalTarihi = Calendar.getInstance();
             finalTarihi.setTime(MainActivity.dateFormat.parse(txtFinal.getText().toString()));
 
-
             Calendar nowTime = Calendar.getInstance();
             nowTime.set(Calendar.MILLISECOND, 0);
             nowTime.set(Calendar.SECOND, 0);
@@ -235,7 +218,6 @@ public class SettingsActivity extends AppCompatActivity {
                 Toast.makeText(this, "Bir dönem bu kadar uzun olamaz. Lütfen geçerli bir aralık girin.", Toast.LENGTH_SHORT).show();
                 return true;
             }
-
         } catch (Exception ex) {
             Toast.makeText(this, "Tarih bilgisi işlnemedi. Lütfen verilerinizi kontrol edin.", Toast.LENGTH_SHORT).show();
             return false;

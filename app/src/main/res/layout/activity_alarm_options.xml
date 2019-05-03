@@ -36,7 +36,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
                     android:fontFamily="@font/arsenal"
-                    android:text="Başlangıç Zamanı"
+                    android:text="@string/sorgu_zamani"
                     android:textColor="@color/colorText"
                     android:textSize="18sp" />
 
@@ -47,9 +47,7 @@
                     android:layout_weight="5"
                     android:ems="10"
                     android:fontFamily="@font/arsenal"
-                    android:hint="Başlangıç Zamanı"
-                    android:inputType="date"
-                    android:paddingLeft="5dp"
+                    android:text="@string/sorgu_zamani"
                     android:textAlignment="textEnd"
                     android:textColor="@color/colorWhiting"
                     android:textSize="20sp" />
@@ -77,7 +75,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
                     android:fontFamily="@font/arsenal"
-                    android:text="Zorluk Derecesi"
+                    android:text="@string/zorluk_derecesi"
                     android:textColor="@color/colorText"
                     android:textSize="18sp" />
 
@@ -88,9 +86,7 @@
                     android:layout_weight="5"
                     android:ems="10"
                     android:fontFamily="@font/arsenal"
-                    android:hint="Zorluk Derecesi"
-                    android:inputType="date"
-                    android:paddingLeft="5dp"
+                    android:text="@string/zorluk_derecesi"
                     android:textAlignment="textEnd"
                     android:textColor="@color/colorWhiting"
                     android:textSize="20sp" />
@@ -118,7 +114,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
                     android:fontFamily="@font/arsenal"
-                    android:text="Soru Sayısı"
+                    android:text="@string/soru_sayisi"
                     android:textColor="@color/colorText"
                     android:textSize="18sp" />
 
@@ -129,9 +125,7 @@
                     android:layout_weight="5"
                     android:ems="10"
                     android:fontFamily="@font/arsenal"
-                    android:hint="Soru Sayısı"
-                    android:inputType="date"
-                    android:paddingLeft="5dp"
+                    android:text="@string/soru_sayisi"
                     android:textAlignment="textEnd"
                     android:textColor="@color/colorWhiting"
                     android:textSize="20sp" />
@@ -159,7 +153,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
                     android:fontFamily="@font/arsenal"
-                    android:text="Alarm Sesi"
+                    android:text="@string/alarm_sesi"
                     android:textColor="@color/colorText"
                     android:textSize="18sp" />
 
@@ -170,9 +164,7 @@
                     android:layout_weight="5"
                     android:ems="10"
                     android:fontFamily="@font/arsenal"
-                    android:hint="Alarm Sesi"
-                    android:inputType="date"
-                    android:paddingLeft="5dp"
+                    android:text="@string/alarm_sesi"
                     android:textAlignment="textEnd"
                     android:textColor="@color/colorWhiting"
                     android:textSize="20sp" />
@@ -192,7 +184,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="3dp"
             android:background="@drawable/button_radius"
-            android:text="Güncelle"
+            android:text="@string/guncelle"
             android:textColor="@color/colorWhiting" />
 
 

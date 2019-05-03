@@ -14,4 +14,16 @@
 
     <string name="drawer_open">Drawer Aç</string>
     <string name="alarm_options">Alarm Seçenekleri</string>
+    <string name="sorgu_zamani">Başlangıç Zamanı</string>
+    <string name="zorluk_derecesi">Zorluk Derecesi</string>
+    <string name="soru_sayisi">Soru Sayısı</string>
+    <string name="alarm_sesi">Alarm Sesi</string>
+    <string name="guncelle">Güncelle</string>
+    <string name="devamsizlik_secenekleri">Devamsızlık Seçenekleri</string>
+    <string name="vize">Vize</string>
+    <string name="finall">Final</string>
+    <string name="_01">01</string>
+    <string name="_08">08</string>
+    <string name="kalan_sure">Sınavlar İçin Kalan Süre (Hafta)</string>
+    <string name="bilgi_txt">Kayıtlı ders bulunamadı. Lütfen verilerinizi yapılandırın.</string>
 </resources>

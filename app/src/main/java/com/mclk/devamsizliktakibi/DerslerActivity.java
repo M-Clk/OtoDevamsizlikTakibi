@@ -119,9 +119,7 @@ public class DerslerActivity extends AppCompatActivity implements View.OnClickLi
                         dialog.dismiss();
                         setData();
                     }
-
                 }
-
             }
         });
     }
