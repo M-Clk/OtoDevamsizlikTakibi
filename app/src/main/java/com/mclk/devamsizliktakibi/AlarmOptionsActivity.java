@@ -2,6 +2,7 @@ package com.mclk.devamsizliktakibi;
 
 import android.annotation.TargetApi;
 import android.app.Dialog;
+import android.content.DialogInterface;
 import android.database.Cursor;
 import android.media.RingtoneManager;
 import android.net.Uri;
@@ -35,8 +36,9 @@ public class AlarmOptionsActivity extends AppCompatActivity {
     Dialog dialogOption;
     String selectedOptionBaslangic = "1 Saat Önce|" + 60,
            selectedOptionZorluk = "Toplama İşlemi|" + "top",
-           selectedOptionSoru = "2 Soru|" + 2,
-           selectedOptionAlarm = "Varsayılan Zil Sesi|"+0;
+           selectedOptionSoru = "2 Soru|" + 2;
+
+    static public String selectedOptionAlarm = "Varsayılan Zil Sesi|"+0;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -154,15 +156,16 @@ public class AlarmOptionsActivity extends AppCompatActivity {
             dialogOption = new Dialog(this);
             dialogOption.setContentView(R.layout.alarm_sesi_dialog);
             RecyclerView recyclerView = dialogOption.findViewById(R.id.recycler_alarm);
+            Button btnSave = (Button)dialogOption.findViewById(R.id.btn_alarm_kaydet);
             final RecyclerView.Adapter recAdapter;
             recyclerView.setHasFixedSize(true);
             recyclerView.setLayoutManager(new LinearLayoutManager(dialogOption.getContext())); //recycler view yapılandırılmaları
 
             int selectedPosition=-1;
-            String selectedAlarmName=txtAlarmSesi.getText().toString();
+            final String selectedAlarmName=txtAlarmSesi.getText().toString();
             List<Uri> alarmUriList = new ArrayList<Uri>();
             List<String> alarmNameList = new ArrayList<String>();
-            RingtoneManager manager = new RingtoneManager(dialogOption.getContext());
+            final RingtoneManager manager = new RingtoneManager(dialogOption.getContext());
             manager.setType(RingtoneManager.TYPE_ALL);
             Cursor cursor = manager.getCursor();
             cursor.moveToFirst();
@@ -173,7 +176,7 @@ public class AlarmOptionsActivity extends AppCompatActivity {
                 alarmUriList.add(manager.getRingtoneUri(cursor.getPosition()));
             } while (cursor.moveToNext());
 
-            recAdapter = new AlarmAdapter(dialogOption.getContext(), alarmNameList, alarmUriList, selectedPosition);
+            recAdapter = new AlarmAdapter(dialogOption.getContext(), alarmNameList, manager, selectedPosition);
             recyclerView.setAdapter(recAdapter);
             recyclerView.setItemAnimator(new DefaultItemAnimator());
             recyclerView.setNestedScrollingEnabled(false);
@@ -184,9 +187,25 @@ public class AlarmOptionsActivity extends AppCompatActivity {
                     dialogOption.dismiss();
                 }
             });
+
+            btnSave.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    txtAlarmSesi.setText(selectedOptionAlarm.substring(0, selectedOptionAlarm.indexOf('|')));
+                    dialogOption.dismiss();
+                }
+            });
+
             if(recAdapter.getItemCount()>0)
             dialogOption.show();
+
             else  Toast.makeText(view.getContext(),"Alarm sesi bulunamadı.",Toast.LENGTH_LONG).show();
+            dialogOption.setOnDismissListener(new DialogInterface.OnDismissListener() {
+                @Override
+                public void onDismiss(DialogInterface dialogInterface) {
+                    manager.getRingtone(0).stop();
+                }
+            });
         }
         catch (Exception ex)
         {
