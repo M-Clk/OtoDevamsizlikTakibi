@@ -16,25 +16,28 @@ import java.util.Calendar;
 public class SettingsActivity extends AppCompatActivity {
 
     Toolbar toolbar;
+
     TextView txtDonemBaslangic,
             txtDonemBitis,
             txtVize,
             txtFinal,
             txtSorguZamani;
+
     Button btnGuncelle;
+
     DatePickerDialog datePickerDialog;
+
     Dialog dialogOption;
+
     String selectedOption = "Dersin Bittiği An|" + 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
-
         InitializingComponents();
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-
         LoadLastSettings();
     }
 
@@ -172,7 +175,6 @@ public class SettingsActivity extends AppCompatActivity {
                 time=60;
                 break;
         }
-
         selectedOption = rd.getText().toString() + "|" + time;
         dialogOption.dismiss();
     }

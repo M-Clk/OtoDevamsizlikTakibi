@@ -26,4 +26,5 @@
     <string name="_08">08</string>
     <string name="kalan_sure">Sınavlar İçin Kalan Süre (Hafta)</string>
     <string name="bilgi_txt">Kayıtlı ders bulunamadı. Lütfen verilerinizi yapılandırın.</string>
+    <string name="cal">Çal</string>
 </resources>

@@ -49,6 +49,7 @@ public class DerslerActivity extends AppCompatActivity implements View.OnClickLi
         this.recyclerView.setLayoutManager(new LinearLayoutManager(this)); //recycler view yapılandırılmaları
         dbveriIslemMerkezi = new dbVeriIslemMerkezi(this);
         tblDersList = dbveriIslemMerkezi.dersListele(); //veribaından veilerin çekilip listeye katarılması.
+
         recAdapter = new DersIslemAdapter(this, tblDersList); // Liste ve context gönderilerek adapter olışturlması.
 
         recyclerView.setAdapter(recAdapter); // RecyclerView adapter yardımı ile verilerin yazılması.
@@ -57,7 +58,6 @@ public class DerslerActivity extends AppCompatActivity implements View.OnClickLi
             this.txtBilgi.setVisibility(View.VISIBLE);
         }
     }
-
     public void onBackPressed() {
         Intent intent = new Intent(this, MainActivity.class);
         intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK);

@@ -1,6 +1,5 @@
 package com.mclk.devamsizliktakibi;
 
-import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
 import android.graphics.Color;
@@ -28,29 +27,15 @@ import java.util.Arrays;
 import java.util.List;
 
     public class DersIslemAdapter extends RecyclerView.Adapter<DersIslemAdapter.ViewHolder> {
-        Button btnEkle;
-        CheckBox chbSinir;
-        int clr = Color.rgb(96, 93, 151);
         private Context context;
-        dbVeriIslemMerkezi dbveriIslemMerkezi;
         private List<tblDers> dersList;
-        AlertDialog dialog;
-        String eskiSinir;
-        int seciliKredi;
-        Spinner spnEkleKredi;
-        EditText txtEkleDersAdi;
-        EditText txtEkleDevamsizlik;
-        EditText txtEkleDevamsizlikSiniri;
-        EditText txtEkleKritikSinir;
         LayoutInflater inflater;
-
 
         public DersIslemAdapter(Context context, List<tblDers> list) {
             this.dersList = list; //veri listesi alındı.
             inflater = LayoutInflater.from(context); //inflater bu context için çalışacak.
             this.context = context;
         }
-
         @Override
         @NonNull
 
@@ -72,9 +57,6 @@ import java.util.List;
         public class ViewHolder extends RecyclerView.ViewHolder implements View.OnClickListener {
             public ImageButton btnSil;
             public CardView crdView;
-            double dev = 0;
-            double devSiniri = 0;
-            double kritikSinir = 0;
             public ProgressBar pbLvl;
             public TextView txtDersAdi;
             public TextView txtDersKredisi;
@@ -95,7 +77,6 @@ import java.util.List;
                 this.btnSil = (ImageButton) view.findViewById(R.id.btn_sil);
                 btnSil.setOnClickListener(this);
                 crdView.setOnClickListener(this);
-
             }
 
             public void setData(tblDers selectedDers, int position) {
@@ -135,7 +116,6 @@ import java.util.List;
                     ShowGuncelleDialog(view.getContext(), selectedDers);
                 }
             }
-
             public void ShowGuncelleDialog(Context context, tblDers selectedDers) {
                 final Dialog dialog = new Dialog(context);
                 dialog.setContentView(R.layout.ekle_ders_temp);
@@ -198,18 +178,16 @@ import java.util.List;
                             }
                                 else
                                 Toast.makeText(dialog.getContext(), "Ders güncellenemedi. Verilerinizi kontrol edin. Tekrar deneyin.", Toast.LENGTH_LONG).show();
-
                         }
-
                     }
                 });
             }
         }
 
-        private void deleteItem(int position) { //Eleman silme metohu
-            dersList.remove(position); //Listeden eleman silme
-            notifyItemRemoved(position); //Silerken bir animasyon ile siler
-            notifyItemRangeChanged(position, dersList.size()); // Silme işleminden sonra eleman indexlerini günceller
+        private void deleteItem(int position) {
+            dersList.remove(position);
+            notifyItemRemoved(position);
+            notifyItemRangeChanged(position, dersList.size());
         }
 
         public boolean eklemeHataKontrol(String dersAdi, double devamsizlik, double devSiniri, double kritikSinir, int kredi, boolean kritikSinirChecked) {

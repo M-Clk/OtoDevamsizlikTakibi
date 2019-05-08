@@ -36,6 +36,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
                     android:fontFamily="@font/arsenal"
+                    android:onClick="OpenTheStartTimeOptions"
                     android:text="@string/sorgu_zamani"
                     android:textColor="@color/colorText"
                     android:textSize="18sp" />
@@ -47,6 +48,7 @@
                     android:layout_weight="5"
                     android:ems="10"
                     android:fontFamily="@font/arsenal"
+                    android:onClick="OpenTheStartTimeOptions"
                     android:text="@string/sorgu_zamani"
                     android:textAlignment="textEnd"
                     android:textColor="@color/colorWhiting"
@@ -75,6 +77,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
                     android:fontFamily="@font/arsenal"
+                    android:onClick="OpenTheDegreeOfDifficultyOptions"
                     android:text="@string/zorluk_derecesi"
                     android:textColor="@color/colorText"
                     android:textSize="18sp" />
@@ -86,6 +89,7 @@
                     android:layout_weight="5"
                     android:ems="10"
                     android:fontFamily="@font/arsenal"
+                    android:onClick="OpenTheDegreeOfDifficultyOptions"
                     android:text="@string/zorluk_derecesi"
                     android:textAlignment="textEnd"
                     android:textColor="@color/colorWhiting"
@@ -114,6 +118,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
                     android:fontFamily="@font/arsenal"
+                    android:onClick="OpenTheQuestionCountOptions"
                     android:text="@string/soru_sayisi"
                     android:textColor="@color/colorText"
                     android:textSize="18sp" />
@@ -125,6 +130,7 @@
                     android:layout_weight="5"
                     android:ems="10"
                     android:fontFamily="@font/arsenal"
+                    android:onClick="OpenTheQuestionCountOptions"
                     android:text="@string/soru_sayisi"
                     android:textAlignment="textEnd"
                     android:textColor="@color/colorWhiting"
@@ -153,6 +159,7 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="3"
                     android:fontFamily="@font/arsenal"
+                    android:onClick="OpenTheAlarmSoundOptions"
                     android:text="@string/alarm_sesi"
                     android:textColor="@color/colorText"
                     android:textSize="18sp" />
@@ -164,6 +171,7 @@
                     android:layout_weight="5"
                     android:ems="10"
                     android:fontFamily="@font/arsenal"
+                    android:onClick="OpenTheAlarmSoundOptions"
                     android:text="@string/alarm_sesi"
                     android:textAlignment="textEnd"
                     android:textColor="@color/colorWhiting"
@@ -184,6 +192,7 @@
             android:layout_height="wrap_content"
             android:layout_margin="3dp"
             android:background="@drawable/button_radius"
+            android:onClick="BtnGuncelleOnClick"
             android:text="@string/guncelle"
             android:textColor="@color/colorWhiting" />
 

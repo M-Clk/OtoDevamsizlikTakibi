@@ -14,12 +14,13 @@
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
         android:fontFamily="@font/arsenal"
-        android:text="Bildirimlerin geleceği zamanı seçin."
+        android:text="Soruların zorluk derecesini seçin."
         android:textColor="@color/colorText"
+        android:paddingLeft="10dp"
+        android:paddingRight="10dp"
         android:textSize="18sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
     <RadioGroup
         android:layout_width="0dp"
         android:layout_height="wrap_content"
@@ -34,7 +35,7 @@
         app:layout_constraintTop_toBottomOf="@+id/txt_baslik_dialog">
 
         <RadioButton
-            android:id="@+id/rdDersAni0"
+            android:id="@+id/rdTop"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="2dp"
@@ -42,16 +43,16 @@
             android:background="@drawable/backround_radius"
             android:buttonTint="@color/colorNavigation"
             android:fontFamily="@font/arsenal"
-            android:onClick="SelectOption"
+            android:onClick="SelectDegreeOfDifficultyOption"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:text="Dersin Bittiği An"
+            android:text="Toplama İşlemi"
             android:textAlignment="viewEnd"
             android:textColor="@color/colorNavigation"
             android:textSize="16sp" />
 
         <RadioButton
-            android:id="@+id/rdSonra10"
+            android:id="@+id/rdCarp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="2dp"
@@ -59,16 +60,16 @@
             android:background="@drawable/backround_radius"
             android:buttonTint="@color/colorNavigation"
             android:fontFamily="@font/arsenal"
-            android:onClick="SelectOption"
+            android:onClick="SelectDegreeOfDifficultyOption"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:text="10 Dakika Sonra"
+            android:text="Çarpma İşlemi"
             android:textAlignment="viewEnd"
             android:textColor="@color/colorNavigation"
             android:textSize="16sp" />
 
         <RadioButton
-            android:id="@+id/rdSonra30"
+            android:id="@+id/rdTopVeCarp"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="2dp"
@@ -76,27 +77,10 @@
             android:background="@drawable/backround_radius"
             android:buttonTint="@color/colorNavigation"
             android:fontFamily="@font/arsenal"
-            android:onClick="SelectOption"
+            android:onClick="SelectDegreeOfDifficultyOption"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
-            android:text="30 Dakika Sonra"
-            android:textAlignment="viewEnd"
-            android:textColor="@color/colorNavigation"
-            android:textSize="16sp" />
-
-        <RadioButton
-            android:id="@+id/rdSonra60"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginBottom="2dp"
-            android:layout_weight="1"
-            android:background="@drawable/backround_radius"
-            android:buttonTint="@color/colorNavigation"
-            android:fontFamily="@font/arsenal"
-            android:onClick="SelectOption"
-            android:paddingLeft="10dp"
-            android:paddingRight="10dp"
-            android:text="1 Saat Sonra"
+            android:text="Toplama Ve Çarpma İşlemi"
             android:textAlignment="viewEnd"
             android:textColor="@color/colorNavigation"
             android:textSize="16sp" />
