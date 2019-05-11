@@ -135,11 +135,11 @@ import java.util.List;
                 txtBaslik.setText("Ders Güncelleme");
                 btnGuncelle.setText("Güncelle");
                 txtDersAdiEkle.setText(selectedDers.getAdi());
-                txtDevamsizlik.setText(decimalFormat.format(selectedDers.devamsizlik));
-                txtDevamsizlikSiniri.setText(decimalFormat.format(selectedDers.devSiniri));
-                if (selectedDers.kritikSinir == -1)
+                txtDevamsizlik.setText(decimalFormat.format(selectedDers.getDevamsizlik()));
+                txtDevamsizlikSiniri.setText(decimalFormat.format(selectedDers.getDevSiniri()));
+                if (selectedDers.getKritikSinir() == -1)
                     chbSinir.setSelected(false);
-                else txtKritikSinir.setText(decimalFormat.format(selectedDers.kritikSinir));
+                else txtKritikSinir.setText(decimalFormat.format(selectedDers.getKritikSinir()));
                 chbSinir.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
                     @Override
                     public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
@@ -151,7 +151,7 @@ import java.util.List;
                 SpinnerAdapter spinnerAdapter = new ArrayAdapter<String>(dialog.getContext(), R.layout.spinner_item, new ArrayList(Arrays.asList(new String[]{"Kredi", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"})));
                 ((ArrayAdapter) spinnerAdapter).setDropDownViewResource(R.layout.spinner_item);
                 spnKredi.setAdapter(spinnerAdapter);
-                spnKredi.setSelection(selectedDers.kredi);
+                spnKredi.setSelection(selectedDers.getKredi());
                 btnGuncelle.setOnClickListener(new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {

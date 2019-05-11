@@ -1,12 +1,12 @@
 package com.mclk.devamsizliktakibi;
 
 public class tblDersProgrami {
-    int Id;
-    int basSaati;
-    int bitSaati;
-    String dersAdi;
-    int dersId;
-    int gunId;
+    private int Id;
+    private int basSaati;
+    private int bitSaati;
+    private String dersAdi;
+    private int dersId;
+    private int gunId;
 
     public tblDersProgrami(int id, int dersId, String dersAdi, int gunId, int basSaati, int bitSaati) {
         this.Id = id;

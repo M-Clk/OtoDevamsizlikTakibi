@@ -179,7 +179,6 @@ public class AlarmOptionsActivity extends AppCompatActivity {
             recAdapter = new AlarmAdapter(dialogOption.getContext(), alarmNameList, manager, selectedPosition);
             recyclerView.setAdapter(recAdapter);
             recyclerView.setItemAnimator(new DefaultItemAnimator());
-            recyclerView.setNestedScrollingEnabled(false);
             Button btnCancel = dialogOption.findViewById(R.id.btn_vazgec);
             btnCancel.setOnClickListener(new View.OnClickListener() {
                 @Override

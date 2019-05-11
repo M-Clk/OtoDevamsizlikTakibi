@@ -38,7 +38,7 @@
                     android:fontFamily="@font/arsenal"
                     android:onClick="OpenTheStartTimeOptions"
                     android:text="@string/sorgu_zamani"
-                    android:textColor="@color/colorText"
+                    android:textColor="@color/colorWhiting"
                     android:textSize="18sp" />
 
                 <TextView
@@ -79,7 +79,7 @@
                     android:fontFamily="@font/arsenal"
                     android:onClick="OpenTheDegreeOfDifficultyOptions"
                     android:text="@string/zorluk_derecesi"
-                    android:textColor="@color/colorText"
+                    android:textColor="@color/colorWhiting"
                     android:textSize="18sp" />
 
                 <TextView
@@ -120,7 +120,7 @@
                     android:fontFamily="@font/arsenal"
                     android:onClick="OpenTheQuestionCountOptions"
                     android:text="@string/soru_sayisi"
-                    android:textColor="@color/colorText"
+                    android:textColor="@color/colorWhiting"
                     android:textSize="18sp" />
 
                 <TextView
@@ -161,7 +161,7 @@
                     android:fontFamily="@font/arsenal"
                     android:onClick="OpenTheAlarmSoundOptions"
                     android:text="@string/alarm_sesi"
-                    android:textColor="@color/colorText"
+                    android:textColor="@color/colorWhiting"
                     android:textSize="18sp" />
 
                 <TextView

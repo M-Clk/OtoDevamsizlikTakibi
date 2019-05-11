@@ -30,7 +30,7 @@
             android:layout_gravity="left"
             android:layout_margin="4dp"
             android:layout_weight="7"
-            android:hint="Dersin Adı "
+            android:hint="Dersin Adı"
             android:inputType="textCapWords"
             android:textColor="@color/colorText" />
 

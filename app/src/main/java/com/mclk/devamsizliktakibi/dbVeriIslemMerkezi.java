@@ -33,11 +33,11 @@ public class dbVeriIslemMerkezi {
 
         Ac();
         ContentValues values = new ContentValues();
-        values.put("adi", eklenecekDers.adi);
-        values.put("kredi", eklenecekDers.kredi);
-        values.put("devSiniri", eklenecekDers.devSiniri);
-        values.put("devamsizlik", eklenecekDers.devamsizlik);
-        values.put("kritikSinir", eklenecekDers.kritikSinir);
+        values.put("adi",  eklenecekDers.getAdi());
+        values.put("kredi",  eklenecekDers.getKredi());
+        values.put("devSiniri",  eklenecekDers.getDevSiniri());
+        values.put("devamsizlik",  eklenecekDers.getDevamsizlik());
+        values.put("kritikSinir",  eklenecekDers.getKritikSinir());
 
         int sonuc = (int) database.insert("Dersler", null, values);
         database.close();
@@ -66,11 +66,11 @@ public class dbVeriIslemMerkezi {
 
         Ac();
         ContentValues values = new ContentValues();
-        values.put("adi", oldDers.adi);
-        values.put("kredi", oldDers.kredi);
-        values.put("devSiniri", oldDers.devSiniri);
-        values.put("devamsizlik", oldDers.devamsizlik);
-        values.put("kritikSinir", oldDers.kritikSinir);
+        values.put("adi", oldDers.getAdi());
+        values.put("kredi", oldDers.getKredi());
+        values.put("devSiniri", oldDers.getDevSiniri());
+        values.put("devamsizlik", oldDers.getDevamsizlik());
+        values.put("kritikSinir", oldDers.getKritikSinir());
 
         int guncellenenSayisi = database.update("Dersler",values,"id="+dersId,null);
         database.close();
@@ -100,12 +100,18 @@ public class dbVeriIslemMerkezi {
         database.close();
         return new tblDers("",0,0,0,0);
     }
-    public int dersProgramiEkle(tblDersProgrami newDersProgrami) {
+    public int dersProgramiEkle(tblDersProgrami eklenecekDersPrg) {
         Ac();
+        ContentValues values = new ContentValues();
+        values.put("gunId", eklenecekDersPrg.getGunId());
+        values.put("dersId", eklenecekDersPrg.getDersId());
+        values.put("basSaati", eklenecekDersPrg.getBasSaati());
+        values.put("bitSaati", eklenecekDersPrg.getBitSaati());
 
+        int eklenenSayisi = (int) database.insert("DersProgrami", null, values);
 
         database.close();
-        return 0;
+        return eklenenSayisi;
     }
     public List<tblDersProgrami> dersProgramiListele(int gunId) {
         Ac();
@@ -122,11 +128,11 @@ public class dbVeriIslemMerkezi {
         database.close();
         return arrayList;
     }
-    public int DersProgramiSil(String dersId) {
+    public int DersProgramiSil(String prgId) {
         Ac();
-
+        int  silinenSayisi = database.delete("DersProgrami","id="+prgId,null);
         database.close();
-        return 0;
+        return silinenSayisi;
     }
 
     public double dersSayisiAl(int dersId) {

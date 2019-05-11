@@ -29,7 +29,6 @@ public class ZamanMerkezi {
         date.setHours(IntToHours(i));
         return date;
     }
-
     public int DateToInt(Date date) {
         return (date.getHours() * 60) + date.getMinutes();
     }

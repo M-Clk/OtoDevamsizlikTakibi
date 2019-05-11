@@ -64,7 +64,7 @@
                     android:fontFamily="@font/arsenal"
                     android:onClick="OpenOptions"
                     android:text="Sorgu Zamanı"
-                    android:textColor="@color/colorText"
+                    android:textColor="@color/colorWhiting"
                     android:textSize="18sp"
                     android:textStyle="italic" />
 
@@ -135,7 +135,7 @@
                     android:fontFamily="@font/arsenal"
                     android:onClick="openTimePickerDialog"
                     android:text="Başlangıç"
-                    android:textColor="@color/colorText"
+                    android:textColor="@color/colorWhiting"
                     android:textSize="18sp"
                     android:textStyle="italic" />
 
@@ -175,7 +175,7 @@
                     android:fontFamily="@font/arsenal"
                     android:onClick="openTimePickerDialog"
                     android:text="Bitiş"
-                    android:textColor="@color/colorText"
+                    android:textColor="@color/colorWhiting"
                     android:textSize="18sp"
                     android:textStyle="italic" />
 
@@ -242,7 +242,7 @@
                     android:fontFamily="@font/arsenal"
                     android:onClick="openTimePickerDialog"
                     android:text="Vize"
-                    android:textColor="@color/colorText"
+                    android:textColor="@color/colorWhiting"
                     android:textSize="18sp"
                     android:textStyle="italic" />
 
@@ -281,7 +281,7 @@
                     android:fontFamily="@font/arsenal"
                     android:onClick="openTimePickerDialog"
                     android:text="Final"
-                    android:textColor="@color/colorText"
+                    android:textColor="@color/colorWhiting"
                     android:textSize="18sp"
                     android:textStyle="italic" />
 

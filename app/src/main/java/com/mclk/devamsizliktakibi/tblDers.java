@@ -1,12 +1,12 @@
 package com.mclk.devamsizliktakibi;
 
 public class tblDers {
-    String adi;
-    double devSiniri;
-    double devamsizlik;
-    int id;
-    int kredi;
-    double kritikSinir;
+    private String adi;
+    private double devSiniri;
+    private double devamsizlik;
+    private  int id;
+    private int kredi;
+    private double kritikSinir;
 
     public tblDers(String adi, int kredi, double devSiniri, double devamsizlik, double kritikSinir) {
         this.kritikSinir = kritikSinir;

@@ -4,13 +4,13 @@
 
     <color name="colorGray">#9D9EAA</color>
 
-    <color name="colorNavigation">#D8EFEAFC</color>
+    <color name="colorNavigation">#D8EAFCF2</color>
 
     <color name="colorPrimary">#6F65F1</color>
 
     <color name="colorPrimaryDark">#4C499B</color>
 
-    <color name="colorText">#605d97</color>
+    <color name="colorText">#605D97</color>
 
     <color name="colorWhiting">#C9D8FC</color>
 
@@ -32,7 +32,7 @@
 
     <color name="error_color_material_light">#ff5722</color>
 
-    <color name="grup_backgroung">#35A647FF</color>
+    <color name="grup_backgroung">#350097FF</color>
 
     <color name="mtrl_btn_bg_color_disabled">#1f000000</color>
 
