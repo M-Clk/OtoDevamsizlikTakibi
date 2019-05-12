@@ -29,7 +29,7 @@ public class SettingsActivity extends AppCompatActivity {
 
     Dialog dialogOption;
 
-    String selectedOption = "Dersin Bittiği An|" + 0;
+      String selectedOption = "Dersin Bittiği An|" + 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

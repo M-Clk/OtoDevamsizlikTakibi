@@ -16,7 +16,7 @@ public class Pazartesi extends Fragment {
     dbVeriIslemMerkezi dbveriIslemMerkezi;
     List<tblDersProgrami> dersProgramiList;
     RecyclerView recyclerView;
-    TextView txtBilgi;
+    public static TextView txtBilgi;
     View view;
 
     public void onCreate(@Nullable Bundle bundle) {
@@ -27,17 +27,17 @@ public class Pazartesi extends Fragment {
         try {
 
             this.view = layoutInflater.inflate(R.layout.activity_pazartesi, viewGroup, false);
-
+            this.txtBilgi = (TextView) this.view.findViewById(R.id.txt_bilgi_pazartesi);
             this.recyclerView = (RecyclerView) this.view.findViewById(R.id.recyclerViewPazartesi);
             this.recyclerView.hasFixedSize();
             this.recyclerView.setLayoutManager(new LinearLayoutManager(this.view.getContext()));
             this.dbveriIslemMerkezi = new dbVeriIslemMerkezi(layoutInflater.getContext());
             this.dersProgramiList = this.dbveriIslemMerkezi.dersProgramiListele(0);
-            RecyclerView.Adapter recAdapter = new DersAdapter(this.dersProgramiList, layoutInflater.getContext(), this.recyclerView);
+            RecyclerView.Adapter recAdapter = new DersAdapter(this.dersProgramiList, layoutInflater.getContext(), this.recyclerView,0);
             this.recyclerView.setAdapter(recAdapter);
 
             if (recAdapter.getItemCount() == 0) {
-                this.txtBilgi = (TextView) this.view.findViewById(R.id.txt_bilgi_pazartesi);
+
                 this.txtBilgi.setVisibility(View.VISIBLE);
             }
             return this.view;

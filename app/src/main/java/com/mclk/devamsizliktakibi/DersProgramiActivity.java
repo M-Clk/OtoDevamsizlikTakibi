@@ -189,7 +189,7 @@ public class DersProgramiActivity extends AppCompatActivity implements View.OnCl
             }
             tblDersProgrami eklenecekDersPrg = new tblDersProgrami(0, selectedId, selectedDersName, viewPager.getCurrentItem(), startTotlMins, finishTotlMins);
             if (dbIslemMerkezi.dersProgramiEkle(eklenecekDersPrg) > 0) {
-                CreateNotification();
+                dbIslemMerkezi.bildirimVeAlarmYukle(view.getContext());
                 setupViewPager(viewPager);
                 viewPager.setCurrentItem(eklenecekDersPrg.getGunId());
             }
@@ -209,10 +209,6 @@ public class DersProgramiActivity extends AppCompatActivity implements View.OnCl
             OpenLessonNames(view);
         else if (view.getId() == R.id.btn_ders_programi_ekle)
             AddTime(view);
-    }
-
-    void CreateNotification() {
-
     }
 
     void RefreshVariables() {

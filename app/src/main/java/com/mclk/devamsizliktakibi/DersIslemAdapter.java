@@ -1,7 +1,9 @@
 package com.mclk.devamsizliktakibi;
 
+import android.app.AlertDialog;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.v7.widget.CardView;
@@ -106,12 +108,32 @@ import java.util.List;
             }
 
             @Override
-            public void onClick(View view) {
+            public void onClick(final View view) {
                 if (view == this.btnSil) {//sil butonu tıllanınca
-                    dbVeriIslemMerkezi vMerkezi = new dbVeriIslemMerkezi(context);
-                    if (vMerkezi.dersSil(txtId.getText().toString()) > 0)
-                        deleteItem(getLayoutPosition());//Elemanın index numarasını(position) göndererek silme işlemini başlatır.
-                } else if (view == this.crdView)//Cardview tıklanınca
+                    AlertDialog.Builder ConfirmDialog = new AlertDialog.Builder(view.getContext());
+                    ConfirmDialog.setTitle("Kritik İşlem");
+                    ConfirmDialog.setMessage("Bir dersi silmeye çalışıyorsunuz. Devam etmek istiyorsanız TAMAM butonuna dokunmanız yeterli.");
+                    ConfirmDialog.setIcon(R.drawable.warning);
+                    ConfirmDialog.setPositiveButton("TAMAM", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dbVeriIslemMerkezi vMerkezi = new dbVeriIslemMerkezi(context);
+                            if (vMerkezi.dersSil(txtId.getText().toString()) > 0)
+                                deleteItem(getLayoutPosition());//Elemanın index numarasını(position) göndererek silme işlemini başlatır.
+                            else
+                                Toast.makeText(view.getContext(), "Ders silinemedi. Bu dersin ders programında ekli olmadığından emin olun. Tekrar deneyin.", Toast.LENGTH_LONG).show();
+                        }
+                    });
+                    ConfirmDialog.setNegativeButton("İPTAL", new DialogInterface.OnClickListener() {
+                        @Override
+                        public void onClick(DialogInterface dialogInterface, int i) {
+                            dialogInterface.cancel();
+                        }
+                    });
+                    ConfirmDialog.show();
+
+                }
+                 else if (view == this.crdView)//Cardview tıklanınca
                 {
                     ShowGuncelleDialog(view.getContext(), selectedDers);
                 }

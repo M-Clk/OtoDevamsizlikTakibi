@@ -16,7 +16,7 @@ public class Cuma extends Fragment {
     dbVeriIslemMerkezi dbveriIslemMerkezi;
     List<tblDersProgrami> dersProgramiList;
     RecyclerView recyclerView;
-    TextView txtBilgi;
+    public static TextView txtBilgi;
     View view;
 
     public void onCreate(@Nullable Bundle bundle) {
@@ -28,14 +28,15 @@ public class Cuma extends Fragment {
             this.view = layoutInflater.inflate(R.layout.activity_cuma, viewGroup, false);
             this.recyclerView = (RecyclerView) this.view.findViewById(R.id.recyclerViewCuma);
             this.recyclerView.hasFixedSize();
+            this.txtBilgi = (TextView) this.view.findViewById(R.id.txt_bilgi_cuma);
             this.recyclerView.setLayoutManager(new LinearLayoutManager(this.view.getContext()));
             this.dbveriIslemMerkezi = new dbVeriIslemMerkezi(layoutInflater.getContext());
             this.dersProgramiList = this.dbveriIslemMerkezi.dersProgramiListele(4);
-            RecyclerView.Adapter recAdapter = new DersAdapter(this.dersProgramiList, layoutInflater.getContext(), this.recyclerView);
+            RecyclerView.Adapter recAdapter = new DersAdapter(this.dersProgramiList, layoutInflater.getContext(), this.recyclerView,4);
             this.recyclerView.setAdapter(recAdapter);
 
             if (recAdapter.getItemCount() == 0) {
-                this.txtBilgi = (TextView) this.view.findViewById(R.id.txt_bilgi_cuma);
+
                 this.txtBilgi.setVisibility(View.VISIBLE);
             }
             return this.view;

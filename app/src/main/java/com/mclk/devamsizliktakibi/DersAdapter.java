@@ -1,6 +1,12 @@
 package com.mclk.devamsizliktakibi;
 
+import android.app.AlarmManager;
+import android.app.AlertDialog;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.DialogInterface;
+import android.content.Intent;
+import android.support.v4.app.NotificationCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -10,6 +16,7 @@ import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -21,13 +28,15 @@ public class DersAdapter extends RecyclerView.Adapter<DersAdapter.ViewHolder>
     RecyclerView recyclerView;
     LayoutInflater inflater;
     ZamanMerkezi zamanMerkezi;
+    int gunId;
 
-    public DersAdapter(List<tblDersProgrami> list, Context context, RecyclerView recyclerView) {
+    public DersAdapter(List<tblDersProgrami> list, Context context, RecyclerView recyclerView, int gunId) {
         this.dersProgramiList = list;
         this.inflater = LayoutInflater.from(context);
         this.context = context;
         this.recyclerView = recyclerView;
         zamanMerkezi = new ZamanMerkezi();
+        this.gunId = gunId;
     }
     @Override
     public ViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -45,13 +54,15 @@ public class DersAdapter extends RecyclerView.Adapter<DersAdapter.ViewHolder>
         return dersProgramiList.size();
     }
 
-    public class ViewHolder extends android.support.v7.widget.RecyclerView.ViewHolder {
+    public class ViewHolder extends android.support.v7.widget.RecyclerView.ViewHolder implements View.OnClickListener {
         public ImageButton btnSil;
         CardView dersProgrami;
         public TextView txtBasSaati;
         public TextView txtBitSaati;
         public TextView txtDersAdi;
         public TextView txtId;
+        int selectedPosition;
+
 
         public ViewHolder(View view) {
             super(view);
@@ -61,11 +72,13 @@ public class DersAdapter extends RecyclerView.Adapter<DersAdapter.ViewHolder>
             this.txtId = (TextView) view.findViewById(R.id.txt_id);
             this.btnSil = (ImageButton) view.findViewById(R.id.btn_program_sil);
             this.dersProgrami = (CardView) view.findViewById(R.id.crd_ders_programi);
+            btnSil.setOnClickListener(this);
         }
 
         void SetData(tblDersProgrami selectedDersPrg, int position) {
+            selectedPosition=position;
             try {
-                txtId.setText(Integer.toString(selectedDersPrg.getDersId()));
+                txtId.setText(Integer.toString(selectedDersPrg.getId()));
                 txtDersAdi.setText(selectedDersPrg.getDersAdi());
 
                 txtBasSaati.setText(GetTimeStr(selectedDersPrg.getBasSaati()));
@@ -75,7 +88,6 @@ public class DersAdapter extends RecyclerView.Adapter<DersAdapter.ViewHolder>
             {
                 Toast.makeText(context,ex.getMessage(),Toast.LENGTH_LONG).show();
             }
-
         }
         String GetTimeStr(int intTime)
         {
@@ -84,6 +96,62 @@ public class DersAdapter extends RecyclerView.Adapter<DersAdapter.ViewHolder>
             int minute=zamanMerkezi.IntToDate(intTime).getMinutes();
             timeStr=(hour < 10 ? "0" + hour : hour) + ":" + (minute < 10 ? "0" + minute : minute);
             return  timeStr;
+        }
+
+        @Override
+        public void onClick(final View view) {
+            if(view.getId()==R.id.btn_program_sil)
+            {
+                AlertDialog.Builder ConfirmDialog = new AlertDialog.Builder(view.getContext());
+                ConfirmDialog.setTitle("Kritik İşlem");
+                ConfirmDialog.setMessage("Bir dersi ders programından silmeye çalışıyorsunuz. Devam etmek istiyorsanız TAMAM butonuna dokunmanız yeterli.");
+                ConfirmDialog.setIcon(R.drawable.warning);
+                ConfirmDialog.setPositiveButton("TAMAM", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dbveriIslemMerkezi = new dbVeriIslemMerkezi(view.getContext());
+                        if (dbveriIslemMerkezi.DersProgramiSil(txtId.getText().toString()) >0) {
+                            AlarmManager alarmManager = (AlarmManager) view.getContext().getSystemService(Context.ALARM_SERVICE);
+                            alarmManager.cancel(PendingIntent.getBroadcast(view.getContext(), Integer.valueOf(txtId.getText().toString()).intValue(), new Intent(view.getContext(), UyariDinleyici.class), 0));
+                            alarmManager.cancel(PendingIntent.getBroadcast(view.getContext(), -Integer.valueOf(txtId.getText().toString()).intValue(), new Intent(view.getContext(), AlarmDinleyici.class), 0));
+                            deleteItem(selectedPosition);
+                            if(dersProgramiList.size()==0)
+                            {
+                                switch (gunId)
+                                {
+                                    case 0:
+                                        Pazartesi.txtBilgi.setVisibility(View.VISIBLE);
+                                        break;
+                                    case 1:
+                                        Sali.txtBilgi.setVisibility(View.VISIBLE);
+                                        break;
+                                    case 2:
+                                        Carsamba.txtBilgi.setVisibility(View.VISIBLE);
+                                        break;
+                                    case 3:
+                                        Persembe.txtBilgi.setVisibility(View.VISIBLE);
+                                        break;
+                                    case 4:
+                                        Cuma.txtBilgi.setVisibility(View.VISIBLE);
+                                }
+                            }
+                        }
+                    }
+                });
+                ConfirmDialog.setNegativeButton("İPTAL", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialogInterface.cancel();
+                    }
+                });
+                ConfirmDialog.show();
+            }
+        }
+        private void deleteItem(int position) {
+            dersProgramiList.remove(position);
+            notifyItemRemoved(position);
+            notifyItemRangeChanged(position, dersProgramiList.size());
+
         }
     }
 

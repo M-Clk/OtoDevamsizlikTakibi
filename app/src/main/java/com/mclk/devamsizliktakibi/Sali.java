@@ -16,7 +16,7 @@ public class Sali extends Fragment {
     dbVeriIslemMerkezi dbveriIslemMerkezi;
     List<tblDersProgrami> dersProgramiList;
     RecyclerView recyclerView;
-    TextView txtBilgi;
+    public static TextView txtBilgi;
     View view;
 
     public void onCreate(@Nullable Bundle bundle) {
@@ -27,17 +27,17 @@ public class Sali extends Fragment {
         try {
 
             this.view = layoutInflater.inflate(R.layout.activity_sali, viewGroup, false);
-
+            this.txtBilgi = (TextView) this.view.findViewById(R.id.txt_bilgi_sali);
             this.recyclerView = (RecyclerView) this.view.findViewById(R.id.recyclerViewSali);
             this.recyclerView.hasFixedSize();
             this.recyclerView.setLayoutManager(new LinearLayoutManager(this.view.getContext()));
             this.dbveriIslemMerkezi = new dbVeriIslemMerkezi(layoutInflater.getContext());
             this.dersProgramiList = this.dbveriIslemMerkezi.dersProgramiListele(1);
-            RecyclerView.Adapter recAdapter = new DersAdapter(this.dersProgramiList, layoutInflater.getContext(), this.recyclerView);
+            RecyclerView.Adapter recAdapter = new DersAdapter(this.dersProgramiList, layoutInflater.getContext(), this.recyclerView,1);
             this.recyclerView.setAdapter(recAdapter);
 
             if (recAdapter.getItemCount() == 0) {
-                this.txtBilgi = (TextView) this.view.findViewById(R.id.txt_bilgi_sali);
+
                 this.txtBilgi.setVisibility(View.VISIBLE);
             }
             return this.view;

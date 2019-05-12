@@ -16,7 +16,7 @@ public class Carsamba extends Fragment {
     dbVeriIslemMerkezi dbveriIslemMerkezi;
     List<tblDersProgrami> dersProgramiList;
     RecyclerView recyclerView;
-    TextView txtBilgi;
+    public static TextView txtBilgi;
     View view;
 
     public void onCreate(@Nullable Bundle bundle) {
@@ -26,17 +26,17 @@ public class Carsamba extends Fragment {
     public View onCreateView(LayoutInflater layoutInflater, ViewGroup viewGroup, Bundle bundle) {
         try {
             this.view = layoutInflater.inflate(R.layout.activity_carsamba, viewGroup, false);
-
+            this.txtBilgi = (TextView) this.view.findViewById(R.id.txt_bilgi_carsamba);
             this.recyclerView = (RecyclerView) this.view.findViewById(R.id.recyclerViewCarsamba);
             this.recyclerView.hasFixedSize();
             this.recyclerView.setLayoutManager(new LinearLayoutManager(this.view.getContext()));
             this.dbveriIslemMerkezi = new dbVeriIslemMerkezi(layoutInflater.getContext());
             this.dersProgramiList = this.dbveriIslemMerkezi.dersProgramiListele(2);
-            RecyclerView.Adapter recAdapter = new DersAdapter(this.dersProgramiList, layoutInflater.getContext(), this.recyclerView);
+            RecyclerView.Adapter recAdapter = new DersAdapter(this.dersProgramiList, layoutInflater.getContext(), this.recyclerView,2);
             this.recyclerView.setAdapter(recAdapter);
 
             if (recAdapter.getItemCount() == 0) {
-                this.txtBilgi = (TextView) this.view.findViewById(R.id.txt_bilgi_carsamba);
+
                 this.txtBilgi.setVisibility(View.VISIBLE);
             }
             return this.view;
