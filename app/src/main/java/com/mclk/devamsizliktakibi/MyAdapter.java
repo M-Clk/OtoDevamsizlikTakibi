@@ -69,14 +69,13 @@ public class MyAdapter  extends RecyclerView.Adapter<MyAdapter.ViewHolder> {
             } else {
                 pbLvl.setVisibility(View.INVISIBLE);
             }
-            String devDurumuTxt = "Devamsızlık Durumu: "+ decimalFormat.format(selectedDers.getDevamsizlik())+ "/"+
-            decimalFormat.format(selectedDers.getDevSiniri());
+            String devDurumuTxt = "Devamsızlık Durumu: " + decimalFormat.format(selectedDers.getDevamsizlik()) + "/" +
+                    decimalFormat.format(selectedDers.getDevSiniri());
             if (devamsizlik > 100) {
-                devDurumuTxt = devamsizlik + " (Kaldınız!)";
+                devDurumuTxt +=" (Kaldınız!)";
                 txtPbDurum.setTextColor(Color.RED);
-            } else {
-              int i3 = (devamsizlik > 0 ? 1 : (devamsizlik == 0.0d ? 0 : -1));
             }
+            else txtPbDurum.setTextColor(txtDersAdi.getTextColors().getDefaultColor());
             txtPbDurum.setText(devDurumuTxt);
         }
     }

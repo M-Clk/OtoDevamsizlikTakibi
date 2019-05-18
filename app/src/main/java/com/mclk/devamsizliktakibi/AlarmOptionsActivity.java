@@ -78,6 +78,8 @@ public class AlarmOptionsActivity extends AppCompatActivity {
                     MainActivity.settingValuesEditor.putString(getResources().getResourceEntryName(txtAlarmSesi.getId()), selectedOptionAlarm);
                     MainActivity.settingValuesEditor.apply();
                     Toast.makeText(this, "Veriler güncellendi.", Toast.LENGTH_SHORT).show();
+                    dbVeriIslemMerkezi dbVeriIslem = new dbVeriIslemMerkezi(this);
+                    dbVeriIslem.bildirimVeAlarmYukle(this);
                     this.finish();
                 } catch (Exception ex) {
             }

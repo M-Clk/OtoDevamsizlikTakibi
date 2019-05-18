@@ -13,6 +13,7 @@ import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.SpinnerAdapter;
@@ -22,7 +23,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class DerslerActivity extends AppCompatActivity implements View.OnClickListener {
+public class DerslerActivity extends AppCompatActivity implements View.OnClickListener, CompoundButton.OnCheckedChangeListener {
 
     TextView txtBilgi;
     RecyclerView.Adapter recAdapter;
@@ -31,6 +32,8 @@ public class DerslerActivity extends AppCompatActivity implements View.OnClickLi
     List<tblDers> tblDersList;
     FloatingActionButton btnAddDers;
     Toolbar toolbar;
+    Dialog dialog;
+    double kritikSinir=0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,7 +84,7 @@ public class DerslerActivity extends AppCompatActivity implements View.OnClickLi
         }
     }
     public void ShowEkleDialog(Context context) {
-        final Dialog dialog = new Dialog(context);
+        dialog = new Dialog(context);
         dialog.setContentView(R.layout.ekle_ders_temp);
         final EditText txtDersAdiEkle = (EditText) dialog.findViewById(R.id.txt_ekle_ders_adi);
         Button btnEkle = (Button) dialog.findViewById(R.id.btn_ders_ekle);
@@ -90,6 +93,7 @@ public class DerslerActivity extends AppCompatActivity implements View.OnClickLi
         final EditText txtDevamsizlikSiniri = (EditText) dialog.findViewById(R.id.txt_ekle_devamsizlik_siniri);
         final EditText txtKritikSinir = (EditText) dialog.findViewById(R.id.txt_ekle_kritik_sinir);
         final CheckBox chbSinir = (CheckBox) dialog.findViewById(R.id.cbSinir);
+        chbSinir.setOnCheckedChangeListener( this);
 
         dialog.show();
         SpinnerAdapter spinnerAdapter = new ArrayAdapter<String>(dialog.getContext(), R.layout.spinner_item, new ArrayList(Arrays.asList(new String[]{"Kredi", "1", "2", "3", "4", "5", "6", "7", "8", "9", "10"})));
@@ -98,18 +102,26 @@ public class DerslerActivity extends AppCompatActivity implements View.OnClickLi
         btnEkle.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
                 String
-                        dersAdi = txtDersAdiEkle.getText().toString();
+                        dersAdi="";
                 double
-                        devamsizlik = Double.parseDouble(txtDevamsizlik.getText().toString()),
-                        devSiniri = Double.parseDouble(txtDevamsizlikSiniri.getText().toString()),
-                        kritikSinir = Double.parseDouble(txtKritikSinir.getText().toString());
-                int kredi = Integer.parseInt(spnKredi.getSelectedItem().toString());
+                        devamsizlik=0 ,
+                        devSiniri=0 ;
+                int kredi = 0;
+                try {
+                    dersAdi = txtDersAdiEkle.getText().toString();
+                    devamsizlik = Double.parseDouble(txtDevamsizlik.getText().toString());
+                    devSiniri = Double.parseDouble(txtDevamsizlikSiniri.getText().toString());
+                    kredi = Integer.parseInt(spnKredi.getSelectedItem().toString());
+                    kritikSinir = Double.parseDouble(txtKritikSinir.getText().toString());
+                }
+                catch (Exception ex)
+                {
+                }
 
-                boolean kritikSinirChecked = chbSinir.isChecked();
-                if (eklemeHataKontrol(dersAdi, devamsizlik, devSiniri, kritikSinir, kredi, kritikSinirChecked)) {
-                    if (!kritikSinirChecked) kritikSinir = -1;
+
+                if (eklemeHataKontrol(dersAdi, devamsizlik, devSiniri, kritikSinir, kredi, chbSinir.isChecked())) {
+                    if (!chbSinir.isChecked()) kritikSinir = -1;
                     tblDers eklenecekDers = new tblDers(dersAdi, kredi, devSiniri, devamsizlik, kritikSinir);
                     dbVeriIslemMerkezi veriM = new dbVeriIslemMerkezi(dialog.getContext());
                     if (veriM.dersEkle(eklenecekDers) == -1)
@@ -153,4 +165,15 @@ public class DerslerActivity extends AppCompatActivity implements View.OnClickLi
         return false;
     }
 
+    @Override
+    public void onCheckedChanged(CompoundButton compoundButton, boolean b) {
+        if (b)
+            dialog.findViewById(R.id.txt_ekle_kritik_sinir).setEnabled(true);
+            else {
+            TextView ekleTxt=(TextView)dialog.findViewById(R.id.txt_ekle_kritik_sinir);
+            ekleTxt.setText("");
+            ekleTxt.setEnabled(false);
+            kritikSinir=-1;
+        }
+    }
 }

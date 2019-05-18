@@ -28,7 +28,6 @@ import java.util.Calendar;
 import java.util.List;
 
 public class DersProgramiActivity extends AppCompatActivity implements View.OnClickListener {
-
     SharedPreferences settingValues;
     ViewPager viewPager;
     TabLayout tabLayout;
@@ -124,9 +123,7 @@ public class DersProgramiActivity extends AppCompatActivity implements View.OnCl
                 }
                 txtTime.setText((hour < 10 ? "0" + hour : hour) + ":" + (minute < 10 ? "0" + minute : minute));
             }
-        }, isStartTime ? (basSaati == -1 ? 0 : basSaati) : (bitSaati == -1 ? 0 : bitSaati), !isStartTime ? (basSaati == -1 ? 0 : basDakika) : (bitSaati == -1 ? 0 : bitDakika), true);
-
-        timePickerDialog.setIcon(isStartTime ? R.drawable.ic_timer_black_24dp : R.drawable.ic_timer_off_black_24dp);
+        }, isStartTime ? (basSaati == -1 ? 0 : basSaati) : (bitSaati == -1 ? 0 : bitSaati), isStartTime ? (basSaati == -1 ? 0 : basDakika) : (bitSaati == -1 ? 0 : bitDakika), true);
         timePickerDialog.show();
     }
 
@@ -176,12 +173,13 @@ public class DersProgramiActivity extends AppCompatActivity implements View.OnCl
                 int tempStartHour = zamanMerkezi.IntToHours(dersProgramiList.get(i).getBasSaati());
                 int tempStartMinute = zamanMerkezi.IntToMinutes(dersProgramiList.get(i).getBasSaati());
                 int tempFinishHour = zamanMerkezi.IntToHours(dersProgramiList.get(i).getBitSaati());
-                int tempFinishMinute = zamanMerkezi.IntToHours(dersProgramiList.get(i).getBitSaati());
+                int tempFinishMinute = zamanMerkezi.IntToMinutes(dersProgramiList.get(i).getBitSaati());
 
-                if (((startTotlMins < tempFinishTotlMins) && (startTotlMins > tempStartTotlMins)) ||
-                        ((tempStartTotlMins < finishTotlMins) && (tempStartTotlMins > startTotlMins)) ||
-                        ((startTotlMins < tempFinishHour) && (finishTotlMins > tempFinishHour)) ||
-                        ((startTotlMins > tempFinishHour) && (finishTotlMins < tempFinishHour))) {
+                if(((startTotlMins < tempFinishTotlMins) && (startTotlMins > tempStartTotlMins))
+                ||((tempStartTotlMins < finishTotlMins) && (tempStartTotlMins > startTotlMins))
+                ||((tempStartTotlMins < finishTotlMins) && (tempStartTotlMins > startTotlMins))
+                ||((startTotlMins < tempFinishTotlMins) && (finishTotlMins > tempFinishTotlMins))
+                ||((startTotlMins > tempFinishTotlMins) && (finishTotlMins < tempFinishTotlMins))) {
                     String tempTimeString = String.format("%02d", tempStartHour) + ":" + String.format("%02d", tempStartMinute) + "-" + String.format("%02d", tempFinishHour) + ":" + String.format("%02d", tempFinishMinute);
                     Toast.makeText(view.getContext(), "Bu saat aralığında,\n " + dersProgramiList.get(i).getDersAdi() + "(" + tempTimeString + ") \ndersiniz bulunmaktadır. Aralığı değiştirin.", Toast.LENGTH_LONG).show();
                     return;

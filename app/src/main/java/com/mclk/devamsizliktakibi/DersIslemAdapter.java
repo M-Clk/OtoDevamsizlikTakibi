@@ -82,7 +82,6 @@ import java.util.List;
             }
 
             public void setData(tblDers selectedDers, int position) {
-
                 DecimalFormat decimalFormat = new DecimalFormat("#.##");
                 this.selectedDers = selectedDers;
                 txtDersKredisi.setText(Integer.toString(selectedDers.getKredi()));
@@ -97,12 +96,15 @@ import java.util.List;
                 String devDurumuTxt = "Devamsızlık Durumu: " + decimalFormat.format(selectedDers.getDevamsizlik()) + "/" +
                         decimalFormat.format(selectedDers.getDevSiniri());
                 if (devamsizlik > 100) {
-                    devDurumuTxt = devamsizlik + " (Kaldınız!)";
+                    devDurumuTxt +=" (Kaldınız!)";
                     txtPbDurum.setTextColor(Color.RED);
                 }
+                else txtPbDurum.setTextColor(txtKritikSinir.getTextColors().getDefaultColor());
                 txtPbDurum.setText(devDurumuTxt);
 
                     txtKritikSinir.setText("Kritik Alarm Sınırı: " + decimalFormat.format(selectedDers.getKritikSinir()));
+                    if(selectedDers.getKritikSinir()==-1)txtKritikSinir.setVisibility(View.INVISIBLE);
+                    else txtKritikSinir.setVisibility(View.VISIBLE);
 
                 txtId.setText(Integer.toString(selectedDers.getId()));
             }

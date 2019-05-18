@@ -16,7 +16,7 @@ public class ZamanMerkezi {
     }
 
     public int IntToHours(int i) {
-        return i > 60 ? i / 60 : i;
+        return i /60;
     }
 
     public int IntToMinutes(int i) {

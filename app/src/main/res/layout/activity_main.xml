@@ -28,6 +28,7 @@
             android:id="@+id/txt_bilgi"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="10dp"
             android:fontFamily="@font/arsenal"
             android:text="@string/bilgi_txt"
             android:textColor="@color/colorAccent"

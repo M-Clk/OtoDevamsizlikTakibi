@@ -2,10 +2,13 @@ package com.mclk.devamsizliktakibi;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.NavigationView.OnNavigationItemSelectedListener;
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -21,6 +24,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements OnNavigationItemSelectedListener {
@@ -57,10 +61,11 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         this.recyclerView = (RecyclerView) findViewById(R.id.recycler_view);
         this.txtVize = (TextView) findViewById(R.id.txt_vizeye_kalan);
         this.txtFinal = (TextView) findViewById(R.id.txt_finale_kalan);
-        this.settingValues = getSharedPreferences("com.mclk.devamsizliktakibi", 0);
+        this.settingValues = getSharedPreferences("com.mclk.devamsizliktakibi", MODE_PRIVATE);
         settingValuesEditor = MainActivity.settingValues.edit();
     }
 
+    @android.support.annotation.RequiresApi(api = Build.VERSION_CODES.O)
     protected void onCreate(Bundle bundle) {
         super.onCreate(bundle);
         setContentView(R.layout.navigation_drawer);
@@ -74,8 +79,6 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
-
-        this.settingValues = getSharedPreferences("com.mclk.devamsizliktakibi", MODE_PRIVATE);
         dateFormat = new SimpleDateFormat("dd.MM.yyyy");
 
         this.recyclerView.setHasFixedSize(true);
@@ -83,7 +86,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         this.dbveriIslemMerkezi = new dbVeriIslemMerkezi(this);
         this.tblDersList = this.dbveriIslemMerkezi.dersListele();
 
-        //this.dbveriIslemMerkezi.bildirimVeAlarmYukle(this);
+        this.dbveriIslemMerkezi.bildirimVeAlarmYukle(this);
         this.recAdapter = new MyAdapter(this.tblDersList, this);
         this.recyclerView.setAdapter(this.recAdapter);
 
@@ -91,17 +94,36 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
             this.txtBilgi.setVisibility(View.VISIBLE);
         }
 
-        int vizeInt = this.settingValues.getInt("vizeTarihi", 0);
-        int finalInt = this.settingValues.getInt("finalTarihi", 0);
-        if (SinavaKalan(vizeInt) < 0) {
+        Date vizeTarihi,
+                finalTarihi;
+        Date nowTime = new Date();
+
+        nowTime.setTime(System.currentTimeMillis());
+        String timeParse=nowTime.getDay()+"."+nowTime.getMonth()+"."+nowTime.getYear();
+        try {
+            vizeTarihi =dateFormat.parse(settingValues.getString(getResources().getResourceEntryName(R.id.txtVizeTarihi), timeParse));
+            finalTarihi = dateFormat.parse(settingValues.getString(getResources().getResourceEntryName(R.id.txtFinalTarihi),timeParse));
+
+        }
+        catch (Exception ex)
+        {
+            vizeTarihi=nowTime;
+            finalTarihi=nowTime;
+            Toast.makeText(this, ex.getMessage(), Toast.LENGTH_LONG).show();
+        }
+
+        long vizeMills = (vizeTarihi.getTime());
+        long finalMills = (finalTarihi.getTime());
+
+        if (SinavaKalan( vizeMills)< 0) {
             this.txtVize.setText("-");
         } else {
-            this.txtVize.setText(Integer.toString(SinavaKalan(vizeInt)));
+            this.txtVize.setText(Integer.toString(SinavaKalan(vizeMills)));
         }
-        if (SinavaKalan(finalInt) < 0) {
+        if (SinavaKalan(finalMills) < 0) {
             this.txtFinal.setText("-");
         } else {
-            this.txtFinal.setText(Integer.toString(SinavaKalan(finalInt)));
+            this.txtFinal.setText(Integer.toString(SinavaKalan(finalMills)));
         }
     }
 
@@ -138,9 +160,10 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         return false;
     }
 
-    int SinavaKalan(int i) {
+    int SinavaKalan(long mills) {
         try {
-            return (i - ((int) (System.currentTimeMillis() / 1000))) / 604800;
+            final long millisOfWeek=604800000;
+            return (int)((mills - System.currentTimeMillis()) / (millisOfWeek));
         } catch (Exception ex) {
             Toast.makeText(this, ex.getMessage(), Toast.LENGTH_LONG).show();
             return 0;

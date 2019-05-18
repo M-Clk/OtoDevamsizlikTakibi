@@ -130,6 +130,8 @@ public class SettingsActivity extends AppCompatActivity {
                     MainActivity.settingValuesEditor.putString(getResources().getResourceEntryName(txtSorguZamani.getId()), selectedOption);
                     MainActivity.settingValuesEditor.apply();
                     Toast.makeText(this, "Veriler güncellendi.", Toast.LENGTH_SHORT).show();
+                    dbVeriIslemMerkezi dbVeriIslem = new dbVeriIslemMerkezi(this);
+                    dbVeriIslem.bildirimVeAlarmYukle(this);
                     this.finish();
                 } catch (Exception ex) {
                 }
@@ -194,12 +196,6 @@ public class SettingsActivity extends AppCompatActivity {
 
             Calendar finalTarihi = Calendar.getInstance();
             finalTarihi.setTime(MainActivity.dateFormat.parse(txtFinal.getText().toString()));
-
-            Calendar nowTime = Calendar.getInstance();
-            nowTime.set(Calendar.MILLISECOND, 0);
-            nowTime.set(Calendar.SECOND, 0);
-            nowTime.set(Calendar.MINUTE, 0);
-            nowTime.set(Calendar.HOUR, 0);
 
             if (finalTarihi.getTime().getTime() < System.currentTimeMillis()) {
                 Toast.makeText(this, "Final tarihiniz geçmiş bir tarihe ayarlanamaz.", Toast.LENGTH_SHORT).show();
