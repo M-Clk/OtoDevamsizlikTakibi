@@ -1,164 +1,116 @@
 package com.mclk.devamsizliktakibi;
 
 import android.app.ActivityManager;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.database.Cursor;
 import android.media.AudioManager;
 import android.media.RingtoneManager;
-import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.KeyEvent;
 import android.view.Menu;
+import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.Window;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Random;
 
-public class AlarmAnindaAcilan extends AppCompatActivity {
+public class AlarmAnindaAcilan extends AppCompatActivity implements OnClickListener {
     String alarmAdi;
     int alarmId;
-    boolean baslat = false;
+    int soruSayisiIlkDeger;
     ImageButton btnKontrol;
     int cevap;
-    Cursor cursor;
     RingtoneManager manager;
     SharedPreferences settingValues;
     int soruSayisi;
     EditText txtCevap;
     TextView txtSoru;
+    String zorlukDerecesi;
+    int alarmSesiId;
+    ProgressBar progressBar;
 
     public boolean onMenuOpened(int i, Menu menu) {
         return false;
     }
 
+
     public boolean dispatchKeyEvent(KeyEvent keyEvent) {
-        Toast.makeText(this, "Lütfen soruyu çözün. Uyanmanız gerek.", Toast.LENGTH_SHORT).show();
+        if (keyEvent.getKeyCode() == KeyEvent.KEYCODE_ENTER)
+            onClick(new View(this));
+        else if (keyEvent.getKeyCode() == KeyEvent.KEYCODE_0 ||
+                keyEvent.getKeyCode() == KeyEvent.KEYCODE_1 ||
+                keyEvent.getKeyCode() == KeyEvent.KEYCODE_2 ||
+                keyEvent.getKeyCode() == KeyEvent.KEYCODE_3 ||
+                keyEvent.getKeyCode() == KeyEvent.KEYCODE_4 ||
+                keyEvent.getKeyCode() == KeyEvent.KEYCODE_5 ||
+                keyEvent.getKeyCode() == KeyEvent.KEYCODE_6 ||
+                keyEvent.getKeyCode() == KeyEvent.KEYCODE_7 ||
+                keyEvent.getKeyCode() == KeyEvent.KEYCODE_8 ||
+                keyEvent.getKeyCode() == KeyEvent.KEYCODE_9 ||
+                keyEvent.getKeyCode() == KeyEvent.KEYCODE_DEL)
+            super.dispatchKeyEvent(keyEvent);
+        else
+            Toast.makeText(this, "Doğru sonucu bulduğunuzda otomatik olarak kapanacaktır.", Toast.LENGTH_SHORT).show();
         return true;
     }
 
     protected void onCreate(Bundle bundle) {
         super.onCreate(bundle);
         try {
-            this.settingValues = getSharedPreferences("com.mclk.devamsizliktakibi", 0);
-            ((AudioManager) getSystemService(AUDIO_SERVICE)).setStreamVolume(2, 100, 17);
-            requestWindowFeature(1);
-            getWindow().setFlags(1024, 1024);
+            settingValues = getSharedPreferences("com.mclk.devamsizliktakibi", 0);
+            ((AudioManager) getSystemService(AUDIO_SERVICE)).setStreamVolume(AudioManager.STREAM_ALARM, AudioManager.ADJUST_LOWER, AudioManager.FLAG_PLAY_SOUND);
+            requestWindowFeature(Window.FEATURE_NO_TITLE);
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
             setContentView(R.layout.activity_alarm_aninda_acilan);
             getWindow().addFlags(6815744);
+
             this.txtSoru = (TextView) findViewById(R.id.txt_soru);
             this.btnKontrol = (ImageButton) findViewById(R.id.btn_kontrol_et);
             TextView textView = (TextView) findViewById(R.id.txt_bilgilendirme);
             this.txtCevap = (EditText) findViewById(R.id.txt_cevap);
-            List<Uri> arrayList = new ArrayList<Uri>();
+            progressBar = (ProgressBar) findViewById(R.id.progressBarQuestion);
             this.manager = new RingtoneManager(this);
-            this.manager.setType(7);
-            this.cursor = this.manager.getCursor();
-            this.cursor.moveToFirst();
-            do {
-                arrayList.add(this.manager.getRingtoneUri(this.cursor.getPosition()));
-            } while (this.cursor.moveToNext());
+            this.manager.setType(RingtoneManager.TYPE_ALL);
+            Cursor cursor = manager.getCursor();
+            cursor.moveToFirst();
+
+
             Intent intent = getIntent();
             this.alarmId = intent.getIntExtra("alarmId", 0);
             this.alarmAdi = intent.getStringExtra("alarmAdi");
-            StringBuilder stringBuilder = new StringBuilder();
-            stringBuilder.append(this.alarmAdi);
-            stringBuilder.append(" dersine gitmeniz gerek. Uyandığınızdan emin olmamız için bu soruyu çözmeniz gerek.");
-            textView.setText(stringBuilder.toString());
-            this.manager.getRingtone(this.settingValues.getInt("alarmSesi", 0)).play();
-            final int i = this.settingValues.getInt("zorlukDerecesi", 0);
-            this.cevap = SoruOlustur(i);
-            this.soruSayisi = this.settingValues.getInt("soruSayisi", 0);
-            this.btnKontrol.setOnClickListener(new OnClickListener() {
-                public void onClick(android.view.View r4) {
-                    /* JADX: method processing error */
-/*
-Error: java.lang.NullPointerException
-	at jadx.core.dex.visitors.regions.ProcessTryCatchRegions.searchTryCatchDominators(ProcessTryCatchRegions.java:75)
-	at jadx.core.dex.visitors.regions.ProcessTryCatchRegions.process(ProcessTryCatchRegions.java:45)
-	at jadx.core.dex.visitors.regions.RegionMakerVisitor.postProcessRegions(RegionMakerVisitor.java:63)
-	at jadx.core.dex.visitors.regions.RegionMakerVisitor.visit(RegionMakerVisitor.java:58)
-	at jadx.core.dex.visitors.DepthTraversal.visit(DepthTraversal.java:31)
-	at jadx.core.dex.visitors.DepthTraversal.visit(DepthTraversal.java:17)
-	at jadx.core.dex.visitors.DepthTraversal.visit(DepthTraversal.java:14)
-	at jadx.core.ProcessClass.process(ProcessClass.java:34)
-	at jadx.api.JadxDecompiler.processClass(JadxDecompiler.java:282)
-	at jadx.api.JavaClass.decompile(JavaClass.java:62)
-	at jadx.api.JadxDecompiler.lambda$appendSourcesSave$0(JadxDecompiler.java:200)
-	at jadx.api.JadxDecompiler$$Lambda$8/1280851663.run(Unknown Source)
-*/
-                    /*
-                    r3 = this;
-                    r4 = 0;
-                    r0 = com.mclk.devamsizliktakibi.AlarmAnindaAcilan.this;	 Catch:{ Exception -> 0x006d }
-                    r0 = r0.txtCevap;	 Catch:{ Exception -> 0x006d }
-                    r0 = r0.getText();	 Catch:{ Exception -> 0x006d }
-                    r0 = r0.toString();	 Catch:{ Exception -> 0x006d }
-                    r0 = java.lang.Integer.valueOf(r0);	 Catch:{ Exception -> 0x006d }
-                    r0 = r0.intValue();	 Catch:{ Exception -> 0x006d }
-                    r1 = com.mclk.devamsizliktakibi.AlarmAnindaAcilan.this;	 Catch:{ Exception -> 0x006d }
-                    r1 = r1.cevap;	 Catch:{ Exception -> 0x006d }
-                    if (r0 != r1) goto L_0x0058;	 Catch:{ Exception -> 0x006d }
-                L_0x001b:
-                    r0 = com.mclk.devamsizliktakibi.AlarmAnindaAcilan.this;	 Catch:{ Exception -> 0x006d }
-                    r1 = r0.soruSayisi;	 Catch:{ Exception -> 0x006d }
-                    r1 = r1 + -1;	 Catch:{ Exception -> 0x006d }
-                    r0.soruSayisi = r1;	 Catch:{ Exception -> 0x006d }
-                    if (r1 != 0) goto L_0x004b;	 Catch:{ Exception -> 0x006d }
-                L_0x0025:
-                    r0 = com.mclk.devamsizliktakibi.AlarmAnindaAcilan.this;	 Catch:{ Exception -> 0x006d }
-                    r0 = r0.manager;	 Catch:{ Exception -> 0x006d }
-                    r1 = com.mclk.devamsizliktakibi.AlarmAnindaAcilan.this;	 Catch:{ Exception -> 0x006d }
-                    r1 = r1.settingValues;	 Catch:{ Exception -> 0x006d }
-                    r2 = "alarmSesi";	 Catch:{ Exception -> 0x006d }
-                    r1 = r1.getInt(r2, r4);	 Catch:{ Exception -> 0x006d }
-                    r0 = r0.getRingtone(r1);	 Catch:{ Exception -> 0x006d }
-                    r0.stop();	 Catch:{ Exception -> 0x006d }
-                    r0 = com.mclk.devamsizliktakibi.AlarmAnindaAcilan.this;	 Catch:{ Exception -> 0x006d }
-                    r1 = "Hadi derse...";	 Catch:{ Exception -> 0x006d }
-                    r0 = android.widget.Toast.makeText(r0, r1, r4);	 Catch:{ Exception -> 0x006d }
-                    r0.show();	 Catch:{ Exception -> 0x006d }
-                    r0 = com.mclk.devamsizliktakibi.AlarmAnindaAcilan.this;	 Catch:{ Exception -> 0x006d }
-                    r0.finishAndRemoveTask();	 Catch:{ Exception -> 0x006d }
-                    goto L_0x0078;	 Catch:{ Exception -> 0x006d }
-                L_0x004b:
-                    r0 = com.mclk.devamsizliktakibi.AlarmAnindaAcilan.this;	 Catch:{ Exception -> 0x006d }
-                    r1 = com.mclk.devamsizliktakibi.AlarmAnindaAcilan.this;	 Catch:{ Exception -> 0x006d }
-                    r2 = r0;	 Catch:{ Exception -> 0x006d }
-                    r1 = r1.SoruOlustur(r2);	 Catch:{ Exception -> 0x006d }
-                    r0.cevap = r1;	 Catch:{ Exception -> 0x006d }
-                    goto L_0x0078;	 Catch:{ Exception -> 0x006d }
-                L_0x0058:
-                    r0 = com.mclk.devamsizliktakibi.AlarmAnindaAcilan.this;	 Catch:{ Exception -> 0x006d }
-                    r0 = r0.txtCevap;	 Catch:{ Exception -> 0x006d }
-                    r1 = "";	 Catch:{ Exception -> 0x006d }
-                    r0.setText(r1);	 Catch:{ Exception -> 0x006d }
-                    r0 = com.mclk.devamsizliktakibi.AlarmAnindaAcilan.this;	 Catch:{ Exception -> 0x006d }
-                    r1 = "Cevabınız doğru değil. Tekrar deneyin.";	 Catch:{ Exception -> 0x006d }
-                    r0 = android.widget.Toast.makeText(r0, r1, r4);	 Catch:{ Exception -> 0x006d }
-                    r0.show();	 Catch:{ Exception -> 0x006d }
-                    goto L_0x0078;
-                L_0x006d:
-                    r0 = com.mclk.devamsizliktakibi.AlarmAnindaAcilan.this;
-                    r1 = "Lütfen sadece sayı girin.";
-                    r4 = android.widget.Toast.makeText(r0, r1, r4);
-                    r4.show();
-                L_0x0078:
-                    return;
-                    */
-                    throw new UnsupportedOperationException("Method not decompiled: com.mclk.devamsizliktakibi.AlarmAnindaAcilan.1.onClick(android.view.View):void");
-                }
-            });
-        } catch (Exception e) {
-            StringBuilder stringBuilder2 = new StringBuilder();
-            stringBuilder2.append("Hata Var : ");
-            stringBuilder2.append(e.getMessage());
-            Toast.makeText(this, stringBuilder2.toString(), Toast.LENGTH_SHORT).show();
+            textView.setText(alarmAdi + " dersi için uyandığınızdan emin olmalıyız. Bu soruyu çözmeniz gerek.");
+
+
+            String strWithValue = settingValues.getString(getResources().getResourceEntryName(R.id.text_zorluk), "Toplama İşlemi|" + "top");
+            zorlukDerecesi = strWithValue.substring(strWithValue.indexOf('|') + 1);
+
+
+            strWithValue = settingValues.getString(getResources().getResourceEntryName(R.id.text_soru_sayisi), "2 Soru|" + 2);
+            soruSayisi = Integer.valueOf(strWithValue.substring(strWithValue.indexOf('|') + 1));
+            soruSayisiIlkDeger=soruSayisi;
+
+            strWithValue = settingValues.getString(getResources().getResourceEntryName(R.id.text_alarm_sesi), "Varsayılan Zil Sesi|" + 0);
+            alarmSesiId = Integer.valueOf(strWithValue.substring(strWithValue.indexOf('|') + 1));
+
+            this.cevap = SoruOlustur();
+            this.manager.getRingtone(alarmSesiId).play();
+
+            btnKontrol.setOnClickListener(this);
+            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.toggleSoftInputFromWindow(txtSoru.getWindowToken(),InputMethodManager.SHOW_IMPLICIT,0);
+        } catch (Exception ex) {
+            Toast.makeText(this, "Hata Var: " + ex.getMessage(), Toast.LENGTH_LONG).show();
         }
     }
 
@@ -169,6 +121,7 @@ Error: java.lang.NullPointerException
         }
     }
 
+
     private void hideSystemUI() {
         getWindow().getDecorView().setSystemUiVisibility(1798);
     }
@@ -178,47 +131,35 @@ Error: java.lang.NullPointerException
         ((ActivityManager) getApplicationContext().getSystemService(ACTIVITY_SERVICE)).moveTaskToFront(getTaskId(), 0);
     }
 
-    int SoruOlustur(int i) {
+    int SoruOlustur() {
         Random random = new Random();
-        int i2 = 11;
-        int i3 = 10;
-        StringBuilder stringBuilder;
+        int sayi1 = 11;
+        int sayi2 = 10;
+        int sayi3;
         int nextInt;
         TextView textView;
-        switch (i) {
-            case 0:
-                i2 = random.nextInt(100);
-                i3 = random.nextInt(100);
-                i = random.nextInt(100);
-                TextView textView2 = this.txtSoru;
-                stringBuilder = new StringBuilder();
-                stringBuilder.append(i2);
-                stringBuilder.append("+");
-                stringBuilder.append(i3);
-                stringBuilder.append("+");
-                stringBuilder.append(i);
-                textView2.setText(stringBuilder.toString());
-                return (i2 + i3) + i;
-            case 1:
-                i = random.nextInt(11) + 1;
-                if (i <= 5) {
-                    i3 = 15;
-                    i2 = 7;
+        TextView txtSoru = this.txtSoru;
+        switch (zorlukDerecesi) {
+            case "top":
+                sayi1 = random.nextInt(100);
+                sayi2 = random.nextInt(100);
+                sayi3 = random.nextInt(100);
+                txtSoru.setText(sayi1 + "+" + sayi2 + "+" + sayi3);
+                return (sayi1 + sayi2) + sayi3;
+            case "carp":
+                sayi3 = random.nextInt(11) + 1;
+                if (sayi3 <= 5) {
+                    sayi2 = 15;
+                    sayi1 = 7;
                 } else {
-                    i2 = 1;
+                    sayi1 = 1;
                 }
-                i3 = random.nextInt(i3) + i2;
+                sayi2 = random.nextInt(sayi2) + sayi1;
                 nextInt = random.nextInt(8) + 1;
                 textView = this.txtSoru;
-                stringBuilder = new StringBuilder();
-                stringBuilder.append(i);
-                stringBuilder.append("*");
-                stringBuilder.append(i3);
-                stringBuilder.append("*");
-                stringBuilder.append(nextInt);
-                textView.setText(stringBuilder.toString());
-                return (i * i3) * nextInt;
-            case 2:
+                textView.setText(sayi3 + "*" + sayi2 + "*" + nextInt);
+                return (sayi3 * sayi2) * nextInt;
+            case "topVeCarp":
                 int i4;
                 int i5;
                 int nextInt2 = random.nextInt(99) + 1;
@@ -232,27 +173,50 @@ Error: java.lang.NullPointerException
                 }
                 i4 = random.nextInt(i4) + i5;
                 if (nextInt3 <= 10) {
-                    i2 = 99;
+                    sayi1 = 99;
                 } else {
-                    i3 = 1;
+                    sayi2 = 1;
                 }
-                i = random.nextInt(99) + 1;
-                nextInt = random.nextInt(i2) + i3;
+                sayi3 = random.nextInt(99) + 1;
+                nextInt = random.nextInt(sayi1) + sayi2;
                 textView = this.txtSoru;
-                StringBuilder stringBuilder2 = new StringBuilder();
-                stringBuilder2.append(nextInt2);
-                stringBuilder2.append("+");
-                stringBuilder2.append(i4);
-                stringBuilder2.append("*");
-                stringBuilder2.append(nextInt3);
-                stringBuilder2.append("+");
-                stringBuilder2.append(nextInt);
-                stringBuilder2.append("*");
-                stringBuilder2.append(i);
-                textView.setText(stringBuilder2.toString());
-                return (nextInt2 + (i4 * nextInt3)) + (nextInt * i);
+                textView.setText(nextInt2 + "+" + i4 + "*" + nextInt3 + "+" + nextInt + "*" + sayi3);
+                return nextInt2 + (i4 * nextInt3) + (nextInt * sayi3);
             default:
                 return 0;
         }
+    }
+
+    @Override
+    public void onClick(View view) {
+
+        int sonuc;
+        try {
+            sonuc = Integer.parseInt(txtCevap.getText().toString());
+        } catch (Exception ex) {
+            Toast.makeText(this, "Soruyu cevaplayın.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+        if (sonuc == cevap)
+        {
+            soruSayisi--;
+            int yuzde = (int)((soruSayisi)*100/soruSayisiIlkDeger);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
+                progressBar.setProgress((100-yuzde),true);
+            }
+            else
+                progressBar.setProgress((100-yuzde));
+        }
+        else {
+            Toast.makeText(this, "Cevabınız doğru değil. Tekrar deneyin.", Toast.LENGTH_SHORT).show();
+        }
+        txtCevap.setText("");
+        if (soruSayisi == 0) {
+            manager.getRingtone(alarmSesiId).stop();
+            Toast.makeText(this, "Hadi derse...", Toast.LENGTH_SHORT).show();
+            ActivityCompat.finishAffinity(this);
+        }
+        else if (sonuc == cevap)
+            cevap=SoruOlustur();
     }
 }

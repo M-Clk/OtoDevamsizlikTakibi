@@ -2,6 +2,7 @@ package com.mclk.devamsizliktakibi;
 
 import android.app.DatePickerDialog;
 import android.app.Dialog;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.Toolbar;
@@ -9,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.DatePicker;
 import android.widget.RadioButton;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 import java.util.Calendar;
@@ -22,6 +24,7 @@ public class SettingsActivity extends AppCompatActivity {
             txtVize,
             txtFinal,
             txtSorguZamani;
+    Switch swtchSessiz;
 
     Button btnGuncelle;
 
@@ -29,7 +32,7 @@ public class SettingsActivity extends AppCompatActivity {
 
     Dialog dialogOption;
 
-      String selectedOption = "Dersin Bittiği An|" + 0;
+    String selectedOption = "Dersin Bittiği An|" + 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -105,6 +108,7 @@ public class SettingsActivity extends AppCompatActivity {
         setDateTxt(txtVize);
         String idLiStr = MainActivity.settingValues.getString(getResources().getResourceEntryName(txtSorguZamani.getId()), selectedOption);
         txtSorguZamani.setText(idLiStr.substring(0, idLiStr.indexOf('|')));
+        swtchSessiz.setChecked(MainActivity.settingValues.getBoolean(getResources().getResourceEntryName(swtchSessiz.getId()), false));
         toolbar = (Toolbar) findViewById(R.id.myToolbar);
         toolbar.setTitle("Ayarlar");
     }
@@ -116,6 +120,7 @@ public class SettingsActivity extends AppCompatActivity {
         this.txtDonemBaslangic = (TextView) findViewById(R.id.txt_donem_bas_tarihi);
         this.txtDonemBitis = (TextView) findViewById(R.id.txt_donem_bitis_tarihi);
         this.txtSorguZamani = (TextView) findViewById(R.id.txt_sorgu_zamani);
+        this.swtchSessiz=(Switch)findViewById(R.id.switch_sessize_al);
         this.btnGuncelle = (Button) findViewById(R.id.btn_ayarlar_guncelle);
     }
 
@@ -128,6 +133,7 @@ public class SettingsActivity extends AppCompatActivity {
                     MainActivity.settingValuesEditor.putString(getResources().getResourceEntryName(txtFinal.getId()), txtFinal.getText().toString());
                     MainActivity.settingValuesEditor.putString(getResources().getResourceEntryName(txtVize.getId()), txtVize.getText().toString());
                     MainActivity.settingValuesEditor.putString(getResources().getResourceEntryName(txtSorguZamani.getId()), selectedOption);
+                    MainActivity.settingValuesEditor.putBoolean(getResources().getResourceEntryName(swtchSessiz.getId()),swtchSessiz.isChecked());
                     MainActivity.settingValuesEditor.apply();
                     Toast.makeText(this, "Veriler güncellendi.", Toast.LENGTH_SHORT).show();
                     dbVeriIslemMerkezi dbVeriIslem = new dbVeriIslemMerkezi(this);
@@ -179,6 +185,18 @@ public class SettingsActivity extends AppCompatActivity {
         }
         selectedOption = rd.getText().toString() + "|" + time;
         dialogOption.dismiss();
+    }
+    void OpenMapActivity(View view)
+    {
+        try {
+            Intent intentMaps = new Intent(this,MapsActivity.class);
+            //intentAlarmActivity.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+            startActivity(intentMaps);
+        }
+        catch (Exception ex)
+        {
+            Toast.makeText(this,ex.getMessage(),Toast.LENGTH_LONG).show();
+        }
     }
 
     boolean CheckError() {

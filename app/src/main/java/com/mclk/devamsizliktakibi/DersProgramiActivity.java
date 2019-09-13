@@ -1,6 +1,5 @@
 package com.mclk.devamsizliktakibi;
 
-import android.app.DatePickerDialog;
 import android.app.Dialog;
 import android.app.TimePickerDialog;
 import android.content.Context;
@@ -14,7 +13,6 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
-import android.util.Log;
 import android.view.View;
 
 import android.widget.Button;
@@ -126,7 +124,6 @@ public class DersProgramiActivity extends AppCompatActivity implements View.OnCl
         }, isStartTime ? (basSaati == -1 ? 0 : basSaati) : (bitSaati == -1 ? 0 : bitSaati), isStartTime ? (basSaati == -1 ? 0 : basDakika) : (bitSaati == -1 ? 0 : bitDakika), true);
         timePickerDialog.show();
     }
-
     void OpenLessonNames(final View view) {
         try {
             dbVeriIslemMerkezi veriIslemMerkezi = new dbVeriIslemMerkezi(view.getContext());

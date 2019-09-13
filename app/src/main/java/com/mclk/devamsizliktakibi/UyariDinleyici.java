@@ -1,6 +1,5 @@
 package com.mclk.devamsizliktakibi;
 
-import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
@@ -10,8 +9,6 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.media.RingtoneManager;
 import android.net.Uri;
-import android.os.Build;
-import android.renderscript.RenderScript;
 import android.support.v4.app.NotificationCompat;
 import android.util.Log;
 import android.widget.Toast;
@@ -26,7 +23,6 @@ import static android.os.Build.VERSION.SDK_INT;
 public class UyariDinleyici extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
-
         try {
             SharedPreferences settingValues = context.getSharedPreferences("com.mclk.devamsizliktakibi", MODE_PRIVATE);
             SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
@@ -55,7 +51,6 @@ public class UyariDinleyici extends BroadcastReceiver {
             }
             //
             Uri defaultUri = RingtoneManager.getDefaultUri(RingtoneManager.TYPE_NOTIFICATION);
-
             String dersAdi = intent.getStringExtra("dersAdi");
             String dersSaati = intent.getStringExtra("dersSaati");
             int dersId = intent.getIntExtra("dersId", 0);
@@ -69,15 +64,15 @@ public class UyariDinleyici extends BroadcastReceiver {
 
             Intent intentNotifyKapat = new Intent(context, NotificationKapat.class);
             intentNotifyKapat.putExtra("NOTIFICATION_ID", notificationId);
-            intentNotifyKapat.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            intentNotifyKapat.putExtra("dersId", dersId);
 
-            PendingIntent derseGitti = PendingIntent.getActivity(context, notificationId, intentNotifyKapat, 0);
+            PendingIntent derseGitti = PendingIntent.getActivity(context, (-notificationId), intentNotifyKapat, 0);
 
             Intent intentDersTatildi = new Intent(context, Tatildi.class);
             intentDersTatildi.putExtra("NOTIFICATION_ID", notificationId);
-            intentDersTatildi.setFlags(Intent.FLAG_ACTIVITY_CLEAR_TASK);
+            intentDersTatildi.putExtra("dersId", dersId);
 
-            PendingIntent dersTatildi = PendingIntent.getActivity(context, notificationId, intentDersTatildi, 0);
+            PendingIntent dersTatildi = PendingIntent.getActivity(context,  2147483647-notificationId, intentDersTatildi, 0);
 
             String mesaj = "Bu gün ("+dersSaati+") saatleri arasındaki "+dersAdi+" dersine gittiniz mi?";
 

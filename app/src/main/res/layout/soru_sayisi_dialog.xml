@@ -2,9 +2,9 @@
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="380dp"
+    android:id="@+id/linear_data_dialog"
+    android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:id="@+id/constraint_data_dialog"
     android:background="@drawable/backround_radius_navigation">
 
     <TextView
@@ -100,6 +100,7 @@
             android:textAlignment="viewEnd"
             android:textColor="@color/colorNavigation"
             android:textSize="16sp" />
+
         <RadioButton
             android:id="@+id/rdSoru5"
             android:layout_width="match_parent"

@@ -14,8 +14,7 @@ public class InitialSettings extends Service {
 
     public void onCreate() {
         super.onCreate();
-        Toast.makeText(this, "Bildirim ve alarmlar yüklendi.", Toast.LENGTH_LONG).show();
-        //this.dbIslem = new dbVeriIslemMerkezi(this);
-        //this.dbIslem.bildirimVeAlarmYukle(this);
+        this.dbIslem = new dbVeriIslemMerkezi(this);
+        this.dbIslem.bildirimVeAlarmYukle(this);
     }
 }

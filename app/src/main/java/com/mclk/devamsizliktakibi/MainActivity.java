@@ -2,13 +2,13 @@ package com.mclk.devamsizliktakibi;
 
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.database.Cursor;
+import android.media.RingtoneManager;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.NavigationView.OnNavigationItemSelectedListener;
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.NotificationManagerCompat;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarDrawerToggle;
@@ -22,13 +22,11 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity implements OnNavigationItemSelectedListener {
-
 
     dbVeriIslemMerkezi dbveriIslemMerkezi;
     DrawerLayout drawerLayout;
@@ -43,7 +41,6 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
     TextView txtBilgi;
     TextView txtFinal;
     TextView txtVize;
-
 
     @Override
     public void onBackPressed() {
@@ -73,14 +70,25 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         InitializingComponents();
         setSupportActionBar(toolbar);
 
-
+/*
+        try {
+            Intent intentAlarmActivity = new Intent(this,AlarmAnindaAcilan.class);
+            intentAlarmActivity.putExtra("alarmAdi", "Mantik Devreleri");
+            intentAlarmActivity.putExtra("alarmId", 4);
+            //intentAlarmActivity.setFlags(Intent.FLAG_ACTIVITY_SINGLE_TOP);
+               startActivity(intentAlarmActivity);
+        }
+        catch (Exception ex)
+        {
+            Toast.makeText(this,ex.getMessage(),Toast.LENGTH_LONG).show();
+        }
+*/
         navigationView.setNavigationItemSelectedListener(this);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, this.drawerLayout, this.toolbar, R.string.drawer_open, R.string.drawer_close);
         drawerLayout.addDrawerListener(toggle);
         toggle.syncState();
 
         dateFormat = new SimpleDateFormat("dd.MM.yyyy");
-
         this.recyclerView.setHasFixedSize(true);
         this.recyclerView.setLayoutManager(new LinearLayoutManager(this));
         this.dbveriIslemMerkezi = new dbVeriIslemMerkezi(this);
@@ -90,10 +98,9 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         this.recAdapter = new MyAdapter(this.tblDersList, this);
         this.recyclerView.setAdapter(this.recAdapter);
 
-        if (this.recAdapter.getItemCount() == 0) {
+        if (this.recAdapter.getItemCount()== 0) {
             this.txtBilgi.setVisibility(View.VISIBLE);
         }
-
         Date vizeTarihi,
                 finalTarihi;
         Date nowTime = new Date();
@@ -125,6 +132,7 @@ public class MainActivity extends AppCompatActivity implements OnNavigationItemS
         } else {
             this.txtFinal.setText(Integer.toString(SinavaKalan(finalMills)));
         }
+
     }
 
     public boolean onCreateOptionsMenu(Menu menu) {

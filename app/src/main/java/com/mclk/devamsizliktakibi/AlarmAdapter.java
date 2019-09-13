@@ -2,8 +2,6 @@ package com.mclk.devamsizliktakibi;
 
 import android.annotation.TargetApi;
 import android.content.Context;
-import android.content.res.Resources;
-import android.graphics.Color;
 import android.media.RingtoneManager;
 import android.net.Uri;
 import android.os.Build;
@@ -23,7 +21,6 @@ public class AlarmAdapter extends RecyclerView.Adapter<AlarmAdapter.ViewHolder> 
     Context context;
     Switch selectedSwitch;
     int selectedVoicePosition=-1;
-    boolean isPlaying=false;
     ImageButton selectedImage;
     RingtoneManager ringtoneManager;
 

@@ -20,7 +20,6 @@ public class dbVeriIslemMerkezi {
     String defaultBaslangic = "1 Saat Önce|" + 60,
             defaultSorguZamani = "Dersin Bittiği An|" + 0;
 
-
     public dbVeriIslemMerkezi(Context context) {
         this.dbsqlKatmani = new dbSqlKatmani(context, "dbDevamsizlikTakibi", null, 1);
     }
@@ -28,7 +27,6 @@ public class dbVeriIslemMerkezi {
     private void Ac() {
         this.database = this.dbsqlKatmani.getWritableDatabase();
     }
-
 
     public int dersEkle(com.mclk.devamsizliktakibi.tblDers eklenecekDers) {
 
@@ -49,7 +47,7 @@ public class dbVeriIslemMerkezi {
         Ac();
         String[] strArr = new String[]{"id", "adi", "kredi", "devSiniri", "devamsizlik", "kritikSinir"};
         List<tblDers> arrayList = new ArrayList<tblDers>();
-        Cursor query = this.database.query("Dersler", strArr, null, null, null, null, "devamsizlik DESC");
+        Cursor query = this.database.query("Dersler", strArr, null, null, null, null, "(devamsizlik*100/devSiniri) DESC");
         query.moveToFirst();
         while (!query.isAfterLast()) {
             int id = query.getInt(0);
@@ -103,7 +101,7 @@ public class dbVeriIslemMerkezi {
                 database.execSQL("UPDATE Dersler SET devamsizlik=devamsizlik+"+artanDev+" Where id="+dersId);
         database.close();
         devArtmisDers = TekDersSorgula(dersId);
-        strSonuc+=decimalFormat.format(devArtmisDers.getDevamsizlik())+" hafta oldu.";
+        strSonuc+=decimalFormat.format(devArtmisDers.getDevamsizlik())+" hafta oldu.\n";
 
         return strSonuc;
     }
@@ -111,18 +109,17 @@ public class dbVeriIslemMerkezi {
     public tblDers TekDersSorgula(int dersId) {
 
         Ac();
-        String strQuery="SELECT  adi, kredi, devSiniri, devamsizlik, kritikSinir,id FROM Dersler WHERE id="+dersId;
+        String strQuery = "SELECT  adi, kredi, devSiniri, devamsizlik, kritikSinir,id FROM Dersler WHERE id=" + dersId;
 
-        Cursor queryCursor = database.rawQuery(strQuery,null);
-        if(queryCursor.getCount()==1)
-        {
-        queryCursor.moveToFirst();
+        Cursor queryCursor = database.rawQuery(strQuery, null);
+        if (queryCursor.getCount() > 0) {
+            queryCursor.moveToFirst();
             tblDers tblders = new tblDers(queryCursor.getString(0), queryCursor.getInt(1), queryCursor.getDouble(2), queryCursor.getDouble(3), queryCursor.getDouble(4));
             tblders.setId(queryCursor.getInt(5));
-        queryCursor.close();
-        database.close();
-        return tblders;}
-        else return null;
+            queryCursor.close();
+            database.close();
+            return tblders;
+        } else return null;
     }
 
     public int dersProgramiEkle(tblDersProgrami eklenecekDersPrg) {
@@ -178,9 +175,12 @@ public class dbVeriIslemMerkezi {
 
     public void bildirimVeAlarmYukle(Context context) {
         try {
+            AlarmManager bildirimAlarmi = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
+
             Ac();
             Intent uyariIntent = new Intent(context, UyariDinleyici.class);
             Intent alarmIntent = new Intent(context, AlarmDinleyici.class);
+            Intent muteControlIntent = new Intent(context,MuteControlReceiver.class);
             Calendar startLessonClndr;
             Calendar finishLessonClndr;
             for (int i = 0; i < 5; i++) {
@@ -193,6 +193,11 @@ public class dbVeriIslemMerkezi {
 
                     startLessonClndr.add(Calendar.MINUTE, selectedDersPrg.getBasSaati());
                     finishLessonClndr.add(Calendar.MINUTE, selectedDersPrg.getBitSaati());
+
+                    if (Calendar.getInstance().after(finishLessonClndr))
+                        finishLessonClndr.add(Calendar.WEEK_OF_MONTH, 1);
+                    if (Calendar.getInstance().after(startLessonClndr))
+                        startLessonClndr.add(Calendar.WEEK_OF_MONTH, 1);
                     //Aldım.
                     String sorguZamaniName = context.getResources().getResourceEntryName(R.id.txt_sorgu_zamani);
                     String strSorguZamani = MainActivity.settingValues.getString(sorguZamaniName, defaultSorguZamani);
@@ -204,13 +209,21 @@ public class dbVeriIslemMerkezi {
                     strBaslangicName = strBaslangicName.substring(strBaslangicName.indexOf('|' )+ 1);
                     int alarmBaslangici = Integer.parseInt(strBaslangicName);
 
-                    //
-
                     int notifyId=selectedDersPrg.getId();
 
                     String dersSaati = String.format("%02d", startLessonClndr.get(Calendar.HOUR_OF_DAY)) + ":" + String.format("%02d", startLessonClndr.get(Calendar.MINUTE)) + " - " + String.format("%02d", finishLessonClndr.get(Calendar.HOUR_OF_DAY)) + ":" + String.format("%02d", finishLessonClndr.get(Calendar.MINUTE));
+
+                    muteControlIntent.putExtra("basSaati",startLessonClndr.get(Calendar.HOUR_OF_DAY));
+                    muteControlIntent.putExtra("basDakikasi",startLessonClndr.get(Calendar.MINUTE));
+                    muteControlIntent.putExtra("bitSaati",finishLessonClndr.get(Calendar.HOUR_OF_DAY));
+                    muteControlIntent.putExtra("bitDakikasi",finishLessonClndr.get(Calendar.MINUTE));
+
+                    bildirimAlarmi.setInexactRepeating(AlarmManager.RTC_WAKEUP,startLessonClndr.getTimeInMillis(), 604800000,PendingIntent.getBroadcast(context,1147483647-notifyId,muteControlIntent,0));
+                    bildirimAlarmi.setInexactRepeating(AlarmManager.RTC_WAKEUP,finishLessonClndr.getTimeInMillis(), 604800000,PendingIntent.getBroadcast(context,-1147483647+notifyId,muteControlIntent,0));
+
                     finishLessonClndr.add(Calendar.MINUTE, sorguGecikmesi); //Ders saatini kaydettikten sonra sorgu süresini ekle
                     startLessonClndr.add(Calendar.MINUTE, -alarmBaslangici); //Alarm saatini ekle
+
                     uyariIntent.putExtra("dersSaati", dersSaati);
                     uyariIntent.putExtra("dersAdi", selectedDersPrg.getDersAdi());
                     uyariIntent.putExtra("dersId", selectedDersPrg.getDersId());
@@ -220,14 +233,8 @@ public class dbVeriIslemMerkezi {
                     alarmIntent.putExtra("alarmId", -notifyId);
                     alarmIntent.putExtra("dersAdi", selectedDersPrg.getDersAdi());
 
-                    if (Calendar.getInstance().after(finishLessonClndr))
-                        finishLessonClndr.add(Calendar.WEEK_OF_MONTH, 1);
-                    if (Calendar.getInstance().after(startLessonClndr))
-                        startLessonClndr.add(Calendar.WEEK_OF_MONTH, 1);
-
-                    AlarmManager bildirimAlarmi = (AlarmManager) context.getSystemService(Context.ALARM_SERVICE);
                     bildirimAlarmi.setInexactRepeating(AlarmManager.RTC_WAKEUP, finishLessonClndr.getTimeInMillis(), 604800000, PendingIntent.getBroadcast(context, notifyId, uyariIntent, 0));
-                    bildirimAlarmi.setInexactRepeating(AlarmManager.RTC_WAKEUP, startLessonClndr.getTimeInMillis(), 604800000, PendingIntent.getBroadcast(context, -notifyId, alarmIntent, 0));
+                    bildirimAlarmi.setInexactRepeating(AlarmManager.RTC_WAKEUP, startLessonClndr.getTimeInMillis(), 604800000,  PendingIntent.getBroadcast(context, -notifyId, alarmIntent, 0));
                 }
             }
         }

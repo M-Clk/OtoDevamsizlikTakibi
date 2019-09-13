@@ -3,15 +3,21 @@ package com.mclk.devamsizliktakibi;
 import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.widget.Toast;
 
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
+
+import static android.content.Context.MODE_PRIVATE;
 
 public class AlarmDinleyici extends BroadcastReceiver {
     @Override
     public void onReceive(Context context, Intent intent) {
         try {
+            SharedPreferences settingValues = context.getSharedPreferences("com.mclk.devamsizliktakibi", MODE_PRIVATE);
+            SimpleDateFormat dateFormat = new SimpleDateFormat("dd.MM.yyyy");
 
             Date nowTime = new Date();
 
@@ -19,8 +25,8 @@ public class AlarmDinleyici extends BroadcastReceiver {
             Date donemBaslangici,
                     donemBitisi;
             try {
-                donemBaslangici = MainActivity.dateFormat.parse(MainActivity.settingValues.getString(context.getResources().getResourceEntryName(R.id.txt_donem_bas_tarihi), MainActivity.dateFormat.format(Calendar.getInstance().getTime())));
-                donemBitisi = MainActivity.dateFormat.parse(MainActivity.settingValues.getString(context.getResources().getResourceEntryName(R.id.txt_donem_bitis_tarihi),MainActivity.dateFormat.format(Calendar.getInstance().getTime())));
+                donemBaslangici = dateFormat.parse(settingValues.getString(context.getResources().getResourceEntryName(R.id.txt_donem_bas_tarihi), dateFormat.format(Calendar.getInstance().getTime())));
+                donemBitisi = dateFormat.parse(settingValues.getString(context.getResources().getResourceEntryName(R.id.txt_donem_bitis_tarihi),dateFormat.format(Calendar.getInstance().getTime())));
             }
             catch (Exception ex)
             {

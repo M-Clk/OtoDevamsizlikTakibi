@@ -282,5 +282,4 @@ public class AlarmOptionsActivity extends AppCompatActivity {
         selectedOptionSoru = rd.getText().toString() + "|" + count;
         dialogOption.dismiss();
     }
-
 }

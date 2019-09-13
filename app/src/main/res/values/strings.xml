@@ -6,7 +6,7 @@
 
     <string name="syllabus">Ders Programı</string>
 
-    <string name="title_activity_alarm_aninda_acilan" >AlarmAnindaAcilan</string>
+    <string name="title_activity_alarm_aninda_acilan">AlarmAnindaAcilan</string>
     <string name="holidays">Tatiller</string>
 
     <string name="lessons">Dersler</string>
@@ -28,4 +28,6 @@
     <string name="bilgi_txt">Kayıtlı ders bulunamadı. Lütfen verilerinizi yapılandırın.</string>
     <string name="cal">Çal</string>
     <string name="time">00:00</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="alarm_sesini_secin">Alarm sesini seçin.</string>
 </resources>

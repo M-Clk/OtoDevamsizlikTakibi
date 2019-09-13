@@ -202,6 +202,8 @@
                 android:background="@drawable/line" />
         </LinearLayout>
 
+
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -223,7 +225,7 @@
 
             <view
                 class="android.support.v7.widget.ActionMenuView"
-               android:id="@+id/view6"
+                android:id="@+id/view6"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -262,7 +264,6 @@
             </LinearLayout>
             <view
                 class="android.support.v7.widget.ActionMenuView"
-               android:id="@+id/view3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -300,13 +301,106 @@
             </LinearLayout>
             <view
                 class="android.support.v7.widget.ActionMenuView"
-                android:id="@+id/view8"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:background="@drawable/line" />
         </LinearLayout>
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="3dp"
+            android:background="@drawable/backround_radius"
+            android:orientation="vertical"
+            android:padding="5dp">
 
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:fontFamily="@font/arsenal"
+                android:text="Diğer Ayarlar"
+                android:textColor="@color/colorPrimaryDark"
+                android:textSize="16sp"
+                android:textStyle="bold" />
+
+            <view
+                class="android.support.v7.widget.ActionMenuView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/line_inverse" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="2dp"
+                android:orientation="horizontal">
+
+
+                <Switch
+                    android:id="@+id/switch_sessize_al"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:fontFamily="@font/arsenal"
+                    android:hint="Dersteyken Telefonu Sessize Al"
+                    android:textAlignment="textStart"
+                    android:textColor="@color/colorWhiting"
+                    android:textSize="18sp"
+                    android:textStyle="italic" />
+            </LinearLayout>
+
+            <view
+                android:id="@+id/view3"
+                class="android.support.v7.widget.ActionMenuView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/line" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="2dp"
+                android:orientation="horizontal"
+                android:visibility="gone">
+
+                <TextView
+                    android:id="@+id/etiket_okul_adi"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="3"
+                    android:fontFamily="@font/arsenal"
+                    android:onClick="OpenMapActivity"
+                    android:text="Okulun Konumu"
+                    android:textColor="@color/colorWhiting"
+                    android:textSize="18sp"
+                    android:textStyle="italic" />
+
+                <TextView
+                    android:id="@+id/txt_okul_adi"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="5"
+                    android:ems="10"
+                    android:fontFamily="@font/arsenal"
+                    android:hint="Selçuk Üniversitesi"
+                    android:onClick="OpenMapActivity"
+                    android:textAlignment="textEnd"
+                    android:textColor="@color/colorWhiting"
+                    android:textSize="20sp" />
+            </LinearLayout>
+
+            <view
+                android:id="@+id/view8"
+                class="android.support.v7.widget.ActionMenuView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:background="@drawable/line"
+                android:visibility="invisible" />
+        </LinearLayout>
         <Button
             android:id="@+id/btn_ayarlar_guncelle"
             android:layout_width="match_parent"

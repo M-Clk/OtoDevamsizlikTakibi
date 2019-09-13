@@ -6,7 +6,6 @@ import android.app.PendingIntent;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.support.v4.app.NotificationCompat;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
@@ -15,9 +14,6 @@ import android.view.ViewGroup;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
-
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
 
 public class DersAdapter extends RecyclerView.Adapter<DersAdapter.ViewHolder>
@@ -114,6 +110,8 @@ public class DersAdapter extends RecyclerView.Adapter<DersAdapter.ViewHolder>
                             AlarmManager alarmManager = (AlarmManager) view.getContext().getSystemService(Context.ALARM_SERVICE);
                             alarmManager.cancel(PendingIntent.getBroadcast(view.getContext(), Integer.valueOf(txtId.getText().toString()).intValue(), new Intent(view.getContext(), UyariDinleyici.class), 0));
                             alarmManager.cancel(PendingIntent.getBroadcast(view.getContext(), -Integer.valueOf(txtId.getText().toString()).intValue(), new Intent(view.getContext(), AlarmDinleyici.class), 0));
+                            alarmManager.cancel(PendingIntent.getBroadcast(view.getContext(),1147483647-Integer.valueOf(txtId.getText().toString()).intValue(),new Intent(view.getContext(),MuteControlReceiver.class),0));
+                            alarmManager.cancel(PendingIntent.getBroadcast(view.getContext(),-1147483647+Integer.valueOf(txtId.getText().toString()).intValue(),new Intent(view.getContext(),MuteControlReceiver.class),0));
                             deleteItem(selectedPosition);
                             if(dersProgramiList.size()==0)
                             {

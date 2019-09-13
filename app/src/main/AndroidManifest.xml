@@ -1,71 +1,126 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest package="com.mclk.devamsizliktakibi"
-xmlns:android="http://schemas.android.com/apk/res/android">
-<uses-permission android:name="android.permission.REORDER_TASKS"/>
-<uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW"/>
-    <uses-permission android:name="android.permission.SET_ALARM"/>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.mclk.devamsizliktakibi">
+    <!--
+         The ACCESS_COARSE/FINE_LOCATION permissions are not required to use
+         Google Maps Android API v2, but you must specify either coarse or fine
+         location permissions for the 'MyLocation' functionality.
+    -->
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
+    <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-permission android:name="android.permission.REORDER_TASKS" />
+    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.SET_ALARM" />
+    <uses-permission android:name="android.permission.ACCESS_NOTIFICATION_POLICY" />
 
-<application android:theme="@style/Theme.Design.NoActionBar"
-    android:supportsRtl="true"
-    android:roundIcon="@drawable/ic_launcher"
-    android:label="@string/app_name"
-    android:icon="@drawable/ic_launcher"
-    android:allowBackup="true">
-    <activity android:name="com.mclk.devamsizliktakibi.MainActivity">
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN"/>
-            <category android:name="android.intent.category.LAUNCHER"/>
-        </intent-filter>
-    </activity>
-    <meta-data android:name="preloaded_fonts"
-        android:resource="@array/preloaded_fonts"/>
-    <activity android:name="com.mclk.devamsizliktakibi.DersProgramiActivity"
-        android:parentActivityName="com.mclk.devamsizliktakibi.MainActivity">
-        <meta-data android:name="android.support.PARENT_ACTIVITY"
-            android:value=".MainActivity"/>
-    </activity>
-    <activity android:name="com.mclk.devamsizliktakibi.SettingsActivity"
-        android:parentActivityName="com.mclk.devamsizliktakibi.MainActivity">
-        <meta-data android:name="android.support.PARENT_ACTIVITY"
-            android:value=".MainActivity"/>
-    </activity>
-    <activity android:name="com.mclk.devamsizliktakibi.TatillerActivity"
-        android:parentActivityName="com.mclk.devamsizliktakibi.MainActivity">
-        <meta-data android:name="android.support.PARENT_ACTIVITY"
-            android:value=".MainActivity"/>
-    </activity>
-    <activity android:name="com.mclk.devamsizliktakibi.AlarmOptionsActivity"
-        android:parentActivityName="com.mclk.devamsizliktakibi.MainActivity">
-        <meta-data android:name="android.support.PARENT_ACTIVITY"
-            android:value=".MainActivity"/>
-    </activity>
-    <activity android:name="com.mclk.devamsizliktakibi.DerslerActivity"
-        android:parentActivityName="com.mclk.devamsizliktakibi.MainActivity">
-        <meta-data android:name="android.support.PARENT_ACTIVITY"
-            android:value=".MainActivity"/>
-    </activity>
-    <receiver android:name="com.mclk.devamsizliktakibi.UyariDinleyici"/>
-    <receiver android:name="com.mclk.devamsizliktakibi.AlarmDinleyici"/>
-    <service android:name="com.mclk.devamsizliktakibi.InitialSettings"/>
-    <receiver android:name="com.mclk.devamsizliktakibi.InitialSettingsReceiver">
-        <intent-filter>
-            <action android:name="android.intent.action.BOOT_COMPLETED"/>
-            <action android:name="android.intent.action.EXTERNAL_APPLICATIONS_AVAILABLE"/>
-        </intent-filter>
-    </receiver>
-    <activity android:name="com.mclk.devamsizliktakibi.NotificationKapat"/>
-    <activity android:name="com.mclk.devamsizliktakibi.DevGuncelle"/>
-    <activity android:name="com.mclk.devamsizliktakibi.Tatildi"/>
-    <activity android:name="com.mclk.devamsizliktakibi.AlarmAnindaAcilan"
-        android:theme="@style/FullscreenTheme"
-        android:label="@string/title_activity_alarm_aninda_acilan"
-        android:configChanges="keyboardHidden|orientation|screenSize">
-        <intent-filter>
-            <category android:name="android.intent.category.LAUNCHER"/>
-            <category android:name="android.intent.category.HOME"/>
-            <category android:name="android.intent.category.DEFAULT"/>
-        </intent-filter>
-    </activity>
-    <meta-data android:name="com.android.vending.derived.apk.id" android:value="1"/>
-</application>
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:roundIcon="@drawable/ic_launcher"
+        android:supportsRtl="true"
+        android:theme="@style/Theme.Design.NoActionBar">
+        <!--
+             The API key for Google Maps-based APIs is defined as a string resource.
+             (See the file "res/values/google_maps_api.xml").
+             Note that the API key is linked to the encryption key used to sign the APK.
+             You need a different API key for each encryption key, including the release key that is used to
+             sign the APK for publishing.
+             You can define the keys for the debug and release targets in src/debug/ and src/release/.
+        -->
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="@string/google_maps_key" />
+
+        <activity
+            android:name=".MapsActivity"
+            android:label="@string/title_activity_maps" />
+        <activity android:name=".MainActivity">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
+
+        <activity
+            android:name=".DersProgramiActivity"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+        <activity
+            android:name=".SettingsActivity"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+        <activity
+            android:name=".TatillerActivity"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+        <activity
+            android:name=".AlarmOptionsActivity"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+        <activity
+            android:name=".DerslerActivity"
+            android:parentActivityName=".MainActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".MainActivity" />
+        </activity>
+
+        <service android:name=".InitialSettings" />
+
+        <receiver android:name=".UyariDinleyici" />
+        <receiver android:name=".AlarmDinleyici" />
+        <receiver android:name=".MuteControlReceiver">
+            <intent-filter>
+                <action android:name="android.media.VOLUME_CHANGED_ACTION" />
+            </intent-filter>
+        </receiver>
+        <receiver android:name=".InitialSettingsReceiver">
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+                <action android:name="android.intent.action.EXTERNAL_APPLICATIONS_AVAILABLE" />
+            </intent-filter>
+        </receiver>
+
+        <activity android:name=".NotificationKapat" />
+        <activity android:name=".DevGuncelle" />
+        <activity android:name=".Tatildi" />
+        <activity
+            android:name=".AlarmAnindaAcilan"
+            android:configChanges="keyboardHidden|orientation|screenSize"
+            android:label="@string/title_activity_alarm_aninda_acilan">
+            <intent-filter>
+                <category android:name="android.intent.category.LAUNCHER" />
+                <category android:name="android.intent.category.HOME" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <meta-data
+            android:name="com.android.vending.derived.apk.id"
+            android:value="1" />
+
+        <uses-library
+            android:name="org.apache.http.legacy"
+            android:required="false" />
+    </application>
+
 </manifest>
